@@ -71,12 +71,7 @@ class MembershipTypeController extends Controller
         } else {
             try {
 
-                // $membership = MembershipType::create([
-                //     'name' => $request->get('name'),
-                //     'price' => $request->get('price'),
-                //     'category' => $request->category,
-                //     'days'=>$request->days
-                // ]);
+
 
                 $membership = new MembershipType();
                 $membership->name = $request->get('name');
@@ -84,11 +79,7 @@ class MembershipTypeController extends Controller
                 $membership->category = $request->get('category');
                 $membership->days = $request->get('days');
                 $membership->save();
-                // MembershipType::create([
-                //     'name' => $request->name,
-                //     'price' => $request->price,
-                // ]);
-// dd($membership);
+
                 return redirect()
                     ->back()
                     ->with('success', 'Registro Éxitoso!');
