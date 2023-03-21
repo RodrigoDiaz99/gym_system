@@ -42,54 +42,29 @@ class MembershipTypeController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required', 'string', 'max:255',
-            'price' => 'required', 'string', 'max:255',
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
             'category' => 'required',
             'days' => 'required',
-
         ], [
             'name.required' => 'El campo de nombre es obligatorio',
             'name.string' => 'El campo de nombre debe ser texto',
             'price.required' => 'El campo de Precio Membresia es obligatorio',
             'category.required' => 'El campo de categoria es obligatorio',
             'days.required' => 'El campo dias de membresias es obligatorio',
-
         ]);
 
         if ($validator->fails()) {
-            $error = $validator->errors()->all();
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-            foreach ($error as $validador) {
-                return redirect()
-                    ->back()
-                    ->with('error', $validador)
-                    ->withInput();
-            }
+        try {
+            $membership = MembershipType::create($request->only(['name', 'price', 'category', 'days']));
 
-            // dd($encode);
+            return redirect()->back()->with('success', 'Registro Éxitoso!');
+        } catch (Exception $e) {
 
-        } else {
-            try {
-
-
-
-                $membership = new MembershipType();
-                $membership->name = $request->get('name');
-                $membership->price = $request->price;
-                $membership->category = $request->get('category');
-                $membership->days = $request->get('days');
-                $membership->save();
-
-                return redirect()
-                    ->back()
-                    ->with('success', 'Registro Éxitoso!');
-            } catch (Exception $e) {
-
-                return redirect()
-                    ->back()
-                    ->with('error', "Error al guardar el archivo" . $e->getMessage())
-                    ->withInput();
-            }
+            return redirect()->back()->with('error', "Error al guardar el archivo" . $e->getMessage())->withInput();
         }
 
     }
@@ -125,7 +100,23 @@ class MembershipTypeController extends Controller
      */
     public function update(MembershipTypeRequest $request, $id)
     {
-        //
+        try {
+
+
+
+            $membership = MembershipType::findOrFail($id);
+            $membership->update($request->only(['name', 'price', 'category', 'days']));
+
+            return redirect()
+                ->back()
+                ->with('success', 'Actualizacion Éxitosa!');
+        } catch (Exception $e) {
+
+            return redirect()
+                ->back()
+                ->with('error', "Error al guardar el archivo" . $e->getMessage())
+                ->withInput();
+        }
     }
 
     /**

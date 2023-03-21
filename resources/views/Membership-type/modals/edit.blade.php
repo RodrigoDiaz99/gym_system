@@ -10,6 +10,7 @@
             <form action="{{ route('Membership-type.update',$membershipType->id) }}" method="POST">
                 <div class="modal-body">
                     @csrf
+                    @method('put')
                     <div class="row">
                         <div class="col-6">
                             <div>
