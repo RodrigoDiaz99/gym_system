@@ -40,13 +40,27 @@
                                         @foreach ($membershipTypes as $membershipType)
                                             <tr>
                                                 <td class="text-bold-500">{{ $membershipType->name }}</td>
-                                                <td class="text-bold-500">{{ $membershipType }}</td>
+                                                @switch($membershipType->category)
+                                                    @case(1)
+                                                        <td class="text-bold-500">Venta en establecimiento</td>
+                                                    @break
+
+                                                    @case(2)
+                                                        <td class="text-bold-500">Venta en pagina</td>
+                                                    @break
+                                                @endswitch
+
+
+
+
+
+
                                                 <td>{{ $membershipType->created_at }}</td>
 
                                                 <td class="text-bold-500" style="width: 150px;">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="pe-1">
-                                                             <button type="button" class="btn btn-icon btn-primary"
+                                                            <button type="button" class="btn btn-icon btn-primary"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#membershiptype-{{ $membershipType->id }}"
                                                                 title="Editar tipo membresia">
@@ -91,5 +105,5 @@
     @include('Membership-type.modals.create')
 @endsection
 @section('scripts')
-<script src="{{asset('js_modulos/membership_type.js')}}"></script>
+    <script src="{{ asset('js_modulos/membership_type.js') }}"></script>
 @endsection

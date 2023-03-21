@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </button>
             </div>
-            <form action="{{ route('Membership-type.store') }}" method="POST">
+            <form action="{{ route('Membership-type.update',$membershipType->id) }}" method="POST">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -24,7 +24,7 @@
                                             </svg>
                                         </span>
                                         <input class="form-control @error('name') is-invalid @enderror" type="text"
-                                            id="name" name="name" placeholder="Nombre tipo membresia">
+                                            id="name" name="name" placeholder="Nombre tipo membresia" value="{{old('name',$membershipType->name)}}">
                                     </div>
                                     @error('name')
                                         <strong class="text-danger">{{ $message }}</strong>
@@ -46,7 +46,7 @@
                                             </svg>
                                         </span>
                                         <input class="form-control @error('price') is-invalid @enderror" type="text"
-                                            id="price" name="price" placeholder="Precio $ 0.00">
+                                            id="price" name="price" placeholder="Precio $ 0.00" value="{{old('price',$membershipType->price)}}">
                                     </div>
                                     @error('price')
                                         <strong class="text-danger">{{ $message }}</strong>
@@ -60,7 +60,7 @@
                             <div>
                                 <label class="@error('category') border-danger text-danger @enderror">Categoria Membresia</label>
                                 <select class="form-select" name="category" id="category">
-                                    <option value="">Seleccione Opcion</option>
+                                    <option value="{{old('category',$membershipType->category)}}">{{($membershipType->category==1 ? "Venta Establecimiento":"Venta en pagina")}}</option>
                                     <option value="1">Venta Establecimiento</option>
                                     <option value="2">Venta en Pagina</option>
 
@@ -69,9 +69,9 @@
                         </div>
                         <div class="col-md">
                             <div>
-                                <label class="@error('category') border-danger text-danger @enderror">Dias Membresias</label>
+                                <label class="@error('days') border-danger text-danger @enderror">Dias Membresias</label>
 
-                                            <input type="number" min="1" step="1" class="form-control @error('price') is-invalid @enderror" id="days" aria-label="Amount" name="days" placeholder="dias membresias" inputmode="numeric" pattern="[0-9]*" onkeydown="filtro()">
+                                            <input type="number" min="1" step="1" class="form-control @error('days') is-invalid @enderror" id="days" aria-label="Amount" name="days" placeholder="dias membresias" inputmode="numeric" pattern="[0-9]*" onkeydown="filtro()" value="{{old('days',$membershipType->days)}}">
                             </div>
                         </div>
 
