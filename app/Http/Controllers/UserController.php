@@ -142,7 +142,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        //prueba del show con jenkins
     }
 
     /**
