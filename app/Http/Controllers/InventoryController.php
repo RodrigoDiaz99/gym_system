@@ -58,7 +58,7 @@ class InventoryController extends Controller
                 ->back()
                 ->with('success', 'Registro Éxitoso!');
         } catch (Exception $e) {
-            dd($e);
+
             return redirect()
                 ->back()
                 ->with('error', 'Hubo un Problema.');

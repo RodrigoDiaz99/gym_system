@@ -11,4 +11,11 @@ class CorteCaja extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = "corte_cajas";
+
+    protected $fillable = [
+        'user_id',
+        'fecha_inicio',
+        'hora_inicio',
+        'cantidad_inicial',
+        'lActivo'];
 }

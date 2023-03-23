@@ -21,18 +21,22 @@ class CorteCajaController extends Controller
     }
     public function store(Request $request)
     {
-        $carbon = Carbon::now()->format('Y-m-d');
-        $hora = Carbon::now()->format('H:m:s');
-        $corte = new CorteCaja();
-        $corte->user_id = Auth::id();
-        $corte->fecha_inicio = $carbon;
-        $corte->hora_inicio = $hora;
-        $corte->cantidad_inicial = $request->cantidad_inicial;
+        try {
+            $corte = new CorteCaja([
+                'user_id' => Auth::id(),
+                'fecha_inicio' => Carbon::now()->format('Y-m-d'),
+                'hora_inicio' => Carbon::now()->format('H:m:s'),
+                'cantidad_inicial' => $request->cantidad_inicial,
+                'lActivo' => true,
+            ]);
+            $corte->save();
+            return redirect()->back()->with('success', 'Ha registrado su dinero base de manera exitosa!!');
+        } catch (\Throwable $th) {
 
-        $corte->lActivo = true;
-
-        $corte->save();
-        return redirect()->back()->with('success', 'Ha registrado su dinero base de manera exitosa!!');
+            return redirect()
+                ->back()
+                ->with('error', 'Hubo un Problema.');
+        }
 
     }
 
@@ -70,9 +74,9 @@ class CorteCajaController extends Controller
             ]);
         } else {
             $corte = CorteCaja::where('user_id', $request->usuario)
-            ->where('lActivo', 1)
-            ->select('lActivo', 'id', 'user_id', 'cantidad_inicial')
-            ->get();
+                ->where('lActivo', 1)
+                ->select('lActivo', 'id', 'user_id', 'cantidad_inicial')
+                ->get();
             foreach ($corte as $caja) {
 
                 $cantidad_ventas = $cantidad_ventas + $caja->price_total;
