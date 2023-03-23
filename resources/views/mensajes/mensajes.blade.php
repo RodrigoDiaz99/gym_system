@@ -35,6 +35,17 @@
         })
         console.log("{{ Session::get('code') }}");
     </script>
+    @elseif(Session::has('restored'))
+
+    <script>
+        swal.fire({
+            icon: 'success',
+            title: 'Exito',
+            text: "{{ Session::get('restored') }}",
+            confirmButtonText: 'Cerrar'
+        })
+        console.log("{{ Session::get('code') }}");
+    </script>
 @elseif (Session::has('errores'))
 <script>
     swal.fire({

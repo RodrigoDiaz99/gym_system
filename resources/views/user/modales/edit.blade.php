@@ -21,38 +21,112 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-12">
-                        <label for="">Nombre Cliente</label>
-                        <div class="form-group">
-                            <div class="input-group input-group-alternative mb-4">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                <input class="form-control" type="text" id="name" name="name"
-                                    value="{{ $row->name }}">
+                        <label for=""><b>Nombre Cliente *</b> </label>
+                        <div class="row">
+                            <div class="col-md">
+                                <label for=""> Nombre(s) *</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" type="text" id="name" name="name"
+                                            value="{{ $row->name }}">
+                                        @error('name')
+                                            <p class="error-message">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <label for="">Apellidos (*)</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" type="text" id="surnames" name="surnames"
+                                            value="{{ $row->surnames }}">
+                                    </div>
+                                    @error('surnames')
+                                        <p class="error-message">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="col-md-12">
-                        <label for="">N&uacute;mero de Tel&eacute;fono (Opcional)</label>
-                        <div class="form-group">
-                            <div class="input-group input-group-alternative mb-4">
-                                <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                <input class="form-control" type="number" name="phone" id="phone" maxlength="10"
-                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                    min="0" value="{{ $row->phone }}">
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="">N&uacute;mero de Telefono *</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" type="number" name="phone" id="phone"
+                                            maxlength="10"
+                                            oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            min="0" value="{{old('phone',$row->phone)  }}">
+                                    </div>
+                                    @error('phone')
+                                        <p class="error-message">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <label for="">N&uacute;mero de Emergencia *</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" type="number" name="contact_phone"
+                                            id="contact_phone" maxlength="10"
+                                            oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                            min="0" value="{{ $row->contact_phone }}">
+                                    </div>
+                                    @error('contact_phone')
+                                        <p class="error-message">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-12">
-                        <label for="">email (Opcional)</label>
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="">Ocupacion *</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" type="text" name="ocupation" id="ocupation"
+                                            value="{{ $row->ocupation }}">
+                                    </div>
+                                    @error('ocupation')
+                                        <p class="error-message">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <label for="">Fecha Nacimiento*</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                        <input class="form-control" type="date" name="born" id="born"
+                                            value="{{ $row->born}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="">Correo Electronico *</label>
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                                 <input class="form-control" type="text" id="email" name="email"
                                     value="{{ $row->email }}">
+
                             </div>
+                            @error('email')
+                                <p class="error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
             </div>

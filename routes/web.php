@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::post('registro', 'store')->name('user.store');
             Route::put('modificar/{id}', 'update')->name('user.update');
             Route::delete('eliminar/{id}', 'destroy')->name('user.destroy');
+            Route::get('restaurar/{id}', 'restore')->name('user.restore');
         });
 
     Route::controller('EstadisticasController')

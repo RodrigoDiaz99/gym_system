@@ -7,7 +7,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -169,18 +168,22 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
+
             $user->name = $request->name;
+            $user->surnames = $request->get('surnames');
             $user->code_user = $request->code_user;
 
             $user->email = $request->email;
 
             $user->phone = $request->phone;
+            $user->contact_phone = $request->contact_phone;
+            $user->ocupation = $request->get('ocupation');
+            $user->born = $request->get('born');
 
-            //  dd($user);
             $user->update();
             return back()->with('updated', '¡Se actualizo el usuario de forma exitosa!');
         } catch (\Throwable $th) {
-            dd($th);
+
             return back()->with('error', 'Hubo un error al agregar los datos. Contacta a soporte del sistema.');
         }
     }
@@ -203,6 +206,19 @@ class UserController extends Controller
             $exception = $th->getMessage();
             return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
         }
+    }
+
+    public function restore($id)
+    {
+        try {
+            User::withTrashed()->find($id)->restore();
+            return back()->with('restored', 'Se restauro de manera exitosa el registro', $id);
+        } catch (\Throwable $th) {
+            $exception = $th->getMessage();
+            return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
+        }
+
+        return back();
     }
     public function edit_user()
     {
