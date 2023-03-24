@@ -8,11 +8,9 @@ use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductUnit;
 use App\Models\Provider;
-use Illuminate\Support\Facades\Validator;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB as DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -72,7 +70,6 @@ class ProductController extends Controller
                 ]);
             }
 
-
             return redirect()
                 ->back()
                 ->with('success', 'Registro Éxitoso!');
@@ -117,7 +114,13 @@ class ProductController extends Controller
     {
 
         try {
-           Product::find($id)->update([
+            $bar_code = Product::where("bar_code", $request->bar_code)->first();
+            if (!is_null($bar_code)) {
+                return redirect()
+                    ->back()
+                    ->with('error', "Ya existe un producto con el mismo codigo de barras");
+            }
+            Product::find($id)->update([
                 'bar_code' => $request->bar_code,
                 'name' => $request->product_name,
                 'product_units_id' => $request->product_unit,
