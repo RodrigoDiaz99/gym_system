@@ -36,6 +36,7 @@
                                             <th>Proveedor</th>
                                             <th>Categoria</th>
                                             <th>Fecha</th>
+                                            <th>Estatus</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -67,31 +68,46 @@
 
                                                 <td>{{ $product->created_at->toDateString() }}</td>
 
-                                                <td class="text-bold-500" style="width: 150px;">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="pe-1">
-                                                            <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal" data-bs-target="#editProduct"
-                                                                title="Editar producto">
 
-                                                                <i class="bi bi-pencil"></i></button>
 
-                                                            @include('Products.modals.edit')
-                                                        </div>
+                                                @if (is_null($product->deleted_at))
+                                                    <td>Activo</td>
+                                                    <td class="text-bold-500" style="width: 150px;">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="pe-1">
+                                                                <button type="button" class="btn btn-icon btn-primary"
+                                                                    data-bs-toggle="modal" data-bs-target="#editProduct-{{$product->id}}"
+                                                                    title="Editar producto">
 
-                                                        <div>
-                                                            <form action="{{ route('products.destroy', $product->id) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-icon btn-danger"
+                                                                    <i class="bi bi-pencil"></i></button>
+
+                                                                @include('Products.modals.edit')
+                                                            </div>
+
+                                                            <div class="pe-1">
+                                                                <button type="button" class="btn btn-icon btn-danger"
+                                                                    data-bs-toggle="modal" data-bs-target="#destroyProduct-{{$product->id}}"
                                                                     title="Eliminar producto">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </button>
-                                                            </form>
+
+                                                                    <i class="bi bi-trash"></i></button>
+                                                                    @include('Products.modals.confirmacion')
+
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
+                                                @else
+                                                    <td>Inactivo</td>
+                                                    <td class="text-bold-500">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <a href="{{ route('product.restore', $product->id) }}"
+                                                                    class="btn btn-icon btn-warning"
+                                                                    title="restaurar Usuario"><i
+                                                                        class="bi bi-arrow-clockwise"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -108,6 +124,7 @@
 
     </div>
     {{-- section modales --}}
+
     @include('Products.modals.create')
 @endsection
 @section('scripts')

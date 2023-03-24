@@ -86,12 +86,13 @@
                                                             <td class="text-bold-500">
                                                                 <div class="row">
                                                                     <div class="col-md-4">
-                                                                <a href="{{ route('user.restore', $row->id) }}"  class="btn btn-icon btn-warning"
-                                                                    title="restaurar Usuario"><i class="bi bi-arrow-clockwise"></i></a>
+                                                                        <a href="{{ route('user.restore', $row->id) }}"
+                                                                            class="btn btn-icon btn-warning"
+                                                                            title="restaurar Usuario"><i
+                                                                                class="bi bi-arrow-clockwise"></i></a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             </td>
-
                                                         @endif
 
 

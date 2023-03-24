@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        $productCategories = CategoryProduct::paginate(20);
+        $productCategories = CategoryProduct::withTrashed()->paginate(20);
 
         return view('Product-category.index', compact('productCategories'));
     }
@@ -108,5 +108,18 @@ class ProductCategoryController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e);
         }
+    }
+
+    public function restore($id)
+    {
+        try {
+            CategoryProduct::withTrashed()->find($id)->restore();
+            return back()->with('restored', 'Se restauro de manera exitosa el registro', $id);
+        } catch (\Throwable $th) {
+            $exception = $th->getMessage();
+            return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
+        }
+
+        return back();
     }
 }

@@ -15,7 +15,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $proveedores = Provider::orderBy('id', 'asc')->paginate(10);
+        $proveedores = Provider::orderBy('id', 'asc')->withTrashed()->paginate(10);
         return view('provider.index', compact('proveedores'));
     }
 
@@ -117,5 +117,19 @@ class ProviderController extends Controller
             $exception = $th->getMessage();
             return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
         }
+    }
+
+
+    public function restore($id)
+    {
+        try {
+            Provider::withTrashed()->find($id)->restore();
+            return back()->with('restored', 'Se restauro de manera exitosa el registro', $id);
+        } catch (\Throwable $th) {
+            $exception = $th->getMessage();
+            return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
+        }
+
+        return back();
     }
 }

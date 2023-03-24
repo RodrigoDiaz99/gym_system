@@ -35,6 +35,7 @@
                                                     <th>Nombre</th>
                                                     <th>N&uacute;mero</th>
                                                     <th>RFC</th>
+                                                    <th>Estatus</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
@@ -45,6 +46,9 @@
                                                         <td class="text-bold-500">{{ $row->name }}</td>
                                                         <td>{{ $row->number_phone }}</td>
                                                         <td class="text-bold-500">{{ $row->rfc }}</td>
+                                                        @if (is_null($row->deleted_at))
+                                                        <td class="text-bold-500">Activo</td>
+
                                                         <td class="text-bold-500">
                                                             <div class="row">
                                                                 <div class="col-md-6">
@@ -72,6 +76,18 @@
 
                                                             </div>
                                                         </td>
+
+                                                        @else
+                                                        <td class="text-bold-500">Inactivo</td>
+                                                        <td class="text-bold-500">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                            <a href="{{ route('provider.restore', $row->id) }}"  class="btn btn-icon btn-warning"
+                                                                title="restaurar proveedor"><i class="bi bi-arrow-clockwise"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        </td>
+                                                        @endif
 
 
                                                     </tr>

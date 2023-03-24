@@ -86,15 +86,16 @@ class ProductUnitController extends Controller
     public function update(ProductUnitRequest $request, $id)
     {
         try {
-            ProductUnit::find($id)->update([
-                'name' => $request->name,
-                'value' => $request->value,
+            $hola= ProductUnit::find($id)->update([
+                'name' => $request->unit_product,
+                'value' => $request->unit_value,
             ]);
 
             return redirect()
                 ->back()
                 ->with('success', 'Registro Éxitoso!');
         } catch (Exception $e) {
+            dd($e);
             return redirect()
                 ->back()
                 ->with('error', $e);
@@ -121,4 +122,5 @@ class ProductUnitController extends Controller
                 ->with('error', $e);
         }
     }
+
 }

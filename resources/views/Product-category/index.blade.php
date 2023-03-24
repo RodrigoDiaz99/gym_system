@@ -33,6 +33,7 @@
                                             <th>Nombre</th>
                                             <th>Descripción</th>
                                             <th>Fecha</th>
+                                            <th>Estatus</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -45,32 +46,47 @@
 
                                                 <td>{{ $productCategory->created_at->toDateString() }}</td>
 
-                                                <td class="text-bold-500" style="width: 150px;">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="pe-1">
-                                                            <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#editProduct-category"
-                                                                title="Editar Unidad de medida">
+                                             @if (is_null($productCategory->deleted_at))
+                                             <td class="text-bold-500">Activo</td>
+                                             <td class="text-bold-500" style="width: 150px;">
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="pe-1">
+                                                        <button type="button" class="btn btn-icon btn-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editProduct-category"
+                                                            title="Editar Unidad de medida">
 
-                                                                <i class="bi bi-pencil"></i></button>
-                                                                @include('Product-category.modals.edit', $productCategory)
-                                                        </div>
-
-                                                        <div>
-                                                            <form
-                                                                action="{{ route('product-categories.destroy', $productCategory->id) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-icon btn-danger"
-                                                                    title="Eliminar Unidad de medida">
-                                                                    <i class="bi bi-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div>
+                                                            <i class="bi bi-pencil"></i></button>
+                                                            @include('Product-category.modals.edit', $productCategory)
                                                     </div>
-                                                </td>
+
+                                                    <div>
+                                                        <form
+                                                            action="{{ route('product-categories.destroy', $productCategory->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-icon btn-danger"
+                                                                title="Eliminar Unidad de medida">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                             @else
+                                             <td class="text-bold-500">Inactivo</td>
+                                             <td class="text-bold-500">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <a href="{{ route('product-categories.restore', $productCategory->id) }}"
+                                                            class="btn btn-icon btn-warning"
+                                                            title="restaurar Usuario"><i
+                                                                class="bi bi-arrow-clockwise"></i></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                             @endif
                                             </tr>
                                         @endforeach
                                     </tbody>

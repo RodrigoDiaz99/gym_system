@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate('30');
+        $products = Product::withTrashed()->paginate('30');
         $productUnits = ProductUnit::all();
         $productCategories = CategoryProduct::all();
         $providers = Provider::all();
@@ -155,4 +155,18 @@ class ProductController extends Controller
                 ->with('error', $e);
         }
     }
+
+    public function restore($id)
+    {
+        try {
+            Product::withTrashed()->find($id)->restore();
+            return back()->with('restored', 'Se restauro de manera exitosa el registro', $id);
+        } catch (\Throwable $th) {
+            $exception = $th->getMessage();
+            return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
+        }
+
+        return back();
+    }
+
 }

@@ -25,7 +25,7 @@
                                         </svg>
                                     </span>
                                     <input class="form-control @error('unit_product') is-invalid @enderror"
-                                        type="text" name="unit_product" placeholder="Nombre Unidad de Medida">
+                                        type="text" name="unit_product" placeholder="Nombre Unidad de Medida" value="{{old('unit_product')}}">
                                 </div>
                                 @error('unit_product')
                                     <strong class="text-danger">{{ $message }}</strong>
@@ -46,7 +46,7 @@
                                         </svg>
                                     </span>
                                     <input class="form-control @error('unit_value') is-invalid @enderror" type="text"
-                                        name="unit_value" placeholder="Valor">
+                                        name="unit_value" placeholder="Valor" value="{{old('unit_value')}}">
                                 </div>
                                 @error('unit_value')
                                     <strong class="text-danger">{{ $message }}</strong>
