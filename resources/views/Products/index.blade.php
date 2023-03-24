@@ -76,7 +76,8 @@
                                                         <div class="d-flex justify-content-center">
                                                             <div class="pe-1">
                                                                 <button type="button" class="btn btn-icon btn-primary"
-                                                                    data-bs-toggle="modal" data-bs-target="#editProduct-{{$product->id}}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editProduct-{{ $product->id }}"
                                                                     title="Editar producto">
 
                                                                     <i class="bi bi-pencil"></i></button>
@@ -86,11 +87,12 @@
 
                                                             <div class="pe-1">
                                                                 <button type="button" class="btn btn-icon btn-danger"
-                                                                    data-bs-toggle="modal" data-bs-target="#destroyProduct-{{$product->id}}"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#destroyProduct-{{ $product->id }}"
                                                                     title="Eliminar producto">
 
                                                                     <i class="bi bi-trash"></i></button>
-                                                                    @include('Products.modals.confirmacion')
+                                                                @include('Products.modals.confirmacion')
 
                                                             </div>
                                                         </div>

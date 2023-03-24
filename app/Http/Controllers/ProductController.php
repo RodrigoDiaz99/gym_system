@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB as DB;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -112,16 +113,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
+
         try {
-            Product::find($id)->update([
+           Product::find($id)->update([
                 'bar_code' => $request->bar_code,
                 'name' => $request->product_name,
                 'product_units_id' => $request->product_unit,
                 'description' => $request->product_description,
                 'providers_id' => $request->providers_id,
-                'requireInventory' => $request->requireInventory != null ? 1 : 0,
+
                 'category_products_id' => $request->product_category,
             ]);
 
@@ -129,6 +131,7 @@ class ProductController extends Controller
                 ->back()
                 ->with('success', 'Actualización Éxitosa!');
         } catch (Exception $e) {
+
             return redirect()
                 ->back()
                 ->with('error', $e);
