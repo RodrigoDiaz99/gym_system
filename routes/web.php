@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::post('registro', 'store')->name('provider.store');
             Route::put('modificar/{id}', 'update')->name('provider.update');
             Route::delete('eliminar/{id}', 'destroy')->name('provider.destroy');
+            Route::get('restaurar/{id}', 'restore')->name('provider.restore');
         });
 
     Route::controller('UserController')
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::post('registro', 'store')->name('user.store');
             Route::put('modificar/{id}', 'update')->name('user.update');
             Route::delete('eliminar/{id}', 'destroy')->name('user.destroy');
+            Route::get('restaurar/{id}', 'restore')->name('user.restore');
         });
 
     Route::controller('EstadisticasController')
@@ -78,9 +80,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('Membership', MembershipController::class);
 
     Route::resource('products', ProductController::class);
-
+    Route::get('product/restaurar/{id}', 'ProductController@restore')->name('product.restore');
     Route::resource('product-units', ProductUnitController::class);
     Route::resource('product-categories', ProductCategoryController::class);
+    Route::get('product-categories/restaurar/{id}', 'ProductCategoryController@restore')->name('product-categories.restore');
 
     Route::get('inventory/updateStatus/{id}', 'InventoryController@updateStatus')->name('inventario.status');
     Route::resource('inventario', InventoryController::class);

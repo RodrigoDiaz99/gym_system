@@ -2,6 +2,10 @@
 
 @section('content')
     @include('mensajes.mensajes')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 30e70f4aaca40012e11d2940c715649e406ad55f
 
     <div class="container-fluid">
         <header class="card px-2 py-4">
@@ -38,6 +42,7 @@
                                                     <th>Usuario</th>
                                                     <th>N&uacute;mero</th>
                                                     <th>Correo</th>
+                                                    <th>Estatus</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
@@ -50,40 +55,49 @@
                                                         <td class="text-bold-500">{{ $row->username }}</td>
                                                         <td>{{ $row->phone }}</td>
                                                         <td class="text-bold-500">{{ $row->email }}</td>
-                                                        <td class="text-bold-500">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#editUser-{{ $row->id }}"
-                                                                        title="Editar Proveedor">
+                                                        @if (is_null($row->deleted_at))
+                                                            <td class="text-bold-500">Activo</td>
+                                                            <td class="text-bold-500">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#editUser-{{ $row->id }}"
+                                                                            title="Editar Proveedor">
 
 
-                                                                        <i class="bi bi-pencil"></i></a>
+                                                                            <i class="bi bi-pencil"></i></a>
+                                                                    </div>
+                                                                    @include('user.modales.edit')
+                                                                    <div class="col-md-4">
+                                                                        <form action="{{ route('user.destroy', $row->id) }}"
+                                                                            method="post">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                class="btn btn-icon btn-danger"
+                                                                                title="Eliminar Usuario"><i
+                                                                                    class="bi bi-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+
                                                                 </div>
-                                                                @include('user.modales.edit')
-                                                                <div class="col-md-4">
-                                                                    <form action="{{ route('user.destroy', $row->id) }}"
-                                                                        method="post">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit"
-                                                                            class="btn btn-icon btn-danger"
-                                                                            title="Eliminar Usuario"><i
-                                                                                class="bi bi-trash"></i>
-                                                                        </button>
-                                                                    </form>
+                                                            </td>
+                                                        @else
+                                                            <td class="text-bold-500">Inactivo</td>
+                                                            <td class="text-bold-500">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <a href="{{ route('user.restore', $row->id) }}"
+                                                                            class="btn btn-icon btn-warning"
+                                                                            title="restaurar Usuario"><i
+                                                                                class="bi bi-arrow-clockwise"></i></a>
+                                                                    </div>
                                                                 </div>
-                                                                {{-- <div class="col-md-4">
-                                                            <form action="{{route('user.destroy',$row->id)}}" method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-icon btn-info" title="Ver Expediente Usuario"><i class="bi bi-list-check"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div> --}}
-                                                            </div>
-                                                        </td>
+                                                            </td>
+                                                        @endif
+
 
 
                                                     </tr>

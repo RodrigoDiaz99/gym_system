@@ -8,10 +8,9 @@ use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductUnit;
 use App\Models\Provider;
-use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB as DB;
 
 class ProductController extends Controller
 {
@@ -22,7 +21,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate('30');
+        $products = Product::withTrashed()->paginate('30');
         $productUnits = ProductUnit::all();
         $productCategories = CategoryProduct::all();
         $providers = Provider::all();
@@ -71,7 +70,6 @@ class ProductController extends Controller
                 ]);
             }
 
-
             return redirect()
                 ->back()
                 ->with('success', 'Registro Éxitoso!');
@@ -112,16 +110,23 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
+
         try {
+            $bar_code = Product::where("bar_code", $request->bar_code)->first();
+            if (!is_null($bar_code)) {
+                return redirect()
+                    ->back()
+                    ->with('error', "Ya existe un producto con el mismo codigo de barras");
+            }
             Product::find($id)->update([
                 'bar_code' => $request->bar_code,
                 'name' => $request->product_name,
                 'product_units_id' => $request->product_unit,
                 'description' => $request->product_description,
                 'providers_id' => $request->providers_id,
-                'requireInventory' => $request->requireInventory != null ? 1 : 0,
+
                 'category_products_id' => $request->product_category,
             ]);
 
@@ -129,6 +134,7 @@ class ProductController extends Controller
                 ->back()
                 ->with('success', 'Actualización Éxitosa!');
         } catch (Exception $e) {
+
             return redirect()
                 ->back()
                 ->with('error', $e);
@@ -155,4 +161,18 @@ class ProductController extends Controller
                 ->with('error', $e);
         }
     }
+
+    public function restore($id)
+    {
+        try {
+            Product::withTrashed()->find($id)->restore();
+            return back()->with('restored', 'Se restauro de manera exitosa el registro', $id);
+        } catch (\Throwable $th) {
+            $exception = $th->getMessage();
+            return back()->with(['error' => 'No se pudo eliminar el registro, por favor, contacta a un administrado del sistema.', 'code' => $exception]);
+        }
+
+        return back();
+    }
+
 }

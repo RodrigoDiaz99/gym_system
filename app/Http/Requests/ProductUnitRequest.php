@@ -28,4 +28,14 @@ class ProductUnitRequest extends FormRequest
             'unit_value' => 'required|min:2'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'unit_product.required' => 'El nombre de la unidad de medida es obligatorio',
+            'unit_product.min' => 'Se necesitan minimo 2 letras',
+            'unit_value.required' => 'La unidad de medida es obligatorio',
+            'unit_value.min' => 'La unidad de medida es obligatorio'
+        ];
+    }
 }
