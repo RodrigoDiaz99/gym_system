@@ -64,7 +64,7 @@
                                                     <div class="d-flex justify-content-center">
                                                         <div class="pe-1">
                                                             <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal" data-bs-target="#editInventory"
+                                                                data-bs-toggle="modal" data-bs-target="#editInventory-{{$inventory->id}}"
                                                                 title="Editar producto">
 
                                                                 <i class="bi bi-pencil"></i></button>
@@ -75,7 +75,7 @@
                                                         <div class="pe-1">
                                                             <button type="button" class="btn btn-icon btn-secondary"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#updateInventoryStatus"
+                                                                data-bs-target="#updateInventoryStatus-{{$inventory->id}}"
                                                                 title="Editar Estado Inventario">
 
                                                                 <i class="bi bi-pencil"></i></button>
@@ -84,7 +84,7 @@
                                                             @include('Inventory.modals.status')
                                                         </div>
 
-                                                        <div>
+                                                        {{-- <div>
                                                             <form action="{{ route('inventario.destroy', $inventory->id) }}"
                                                                 method="post">
                                                                 @csrf
@@ -94,7 +94,7 @@
                                                                     <i class="bi bi-trash"></i>
                                                                 </button>
                                                             </form>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </td>
                                             </tr>

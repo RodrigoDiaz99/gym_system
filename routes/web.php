@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('product-categories', ProductCategoryController::class);
     Route::get('product-categories/restaurar/{id}', 'ProductCategoryController@restore')->name('product-categories.restore');
 
-    Route::get('inventory/updateStatus/{id}', 'InventoryController@updateStatus')->name('inventario.status');
+    Route::put('inventory/updateStatus/{id}', 'InventoryController@updateStatus')->name('inventario.status');
     Route::resource('inventario', InventoryController::class);
 
     Route::resource('colaboradores', CollaboratorsController::class);

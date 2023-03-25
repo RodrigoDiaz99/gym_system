@@ -117,24 +117,27 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InventoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
-            Inventory::find($id)->create([
-                'products_id' => $request->product,
-                'quantity' => $request->quantity,
-                'minimum_alert' => $request->minimun_alert,
-                'maximun_alert' => $request->maximun_alert,
-                'purchase_price' => $request->purchase_price,
-                'sales_price' => $request->seles_price,
-                'asigned_by' => Auth::id(),
-                'status' => $request->product_status,
-            ]);
+
+           $inventario= Inventory::find($id);
+
+
+                $inventario->quantity = $request->quantity;
+                $inventario->minimum_alert = $request->minimum_alert;
+                $inventario->maximun_alert = $request->maximun_alert;
+                $inventario->purchase_price = $request->purchase_price;
+                $inventario->sales_price = $request->sales_price;
+
+                $inventario->status = $request->product_status;
+                $inventario->update();
 
             return redirect()
                 ->back()
                 ->with('success', 'Registro Éxitoso!');
         } catch (Exception $e) {
+            dd($e);
             return redirect()
                 ->back()
                 ->with('error', 'Hubo un Problema.');
