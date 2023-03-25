@@ -2,10 +2,6 @@
 
 @section('content')
     @include('mensajes.mensajes')
-<<<<<<< HEAD
-=======
-
->>>>>>> 9f4ad57fbfe67f91525062ab1f2c0299c1304fba
 
     <div class="container-fluid">
         <header class="card px-2 py-4">
