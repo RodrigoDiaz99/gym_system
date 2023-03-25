@@ -29,59 +29,6 @@ $(function ($) {
         $("#btnRemoverImg").show();
     }
         });
-    // console.log("hola 23234");
-    // $('#capa_create_record').hide();
-    // $('#nuevo_expediente').on('click', function () {
-    //     $('#capa_index_record').fadeOut(1000, function () {
-
-    //         $("#capa_create_record").fadeIn(1000, function () {
-    //             $(window).on('resize');
-    //         });
-    //     });
-
-    // });
-    // /**Select de busqueda de usuarios */
-
-    // $('#search_user').select2({
-    //     width: '100%',
-    //     placeholder: "Seleccione una Opcion",
-    //     allowClear: true,
-    //     language: {
-    //         noResults: function () {
-    //             return "No hay resultado";
-    //         },
-    //         searching: function () {
-    //             return "Buscando..";
-    //         },
-    //     },
-
-    // });
-
-    // $('#search_user').on('select2:select', function () {
-    //     getdatos_select();
-    // });
-    // $('#search_user2').select2({
-
-    //     width: '100%',
-    //     placeholder: "Seleccione una Opcion",
-    //     allowClear: true,
-    //     language: {
-    //         noResults: function () {
-    //             return "No hay resultado";
-    //         },
-    //         searching: function () {
-    //             return "Buscando..";
-    //         },
-    //     },
-
-    // });
-
-    // $('#search_user2').on('select2:select', function () {
-
-    //     $("#gridExpediente").bootstrapTable("removeAll");
-    //     $("#gridExpediente").bootstrapTable("refresh");
-
-    // });
 
     // /**Ocultar Collapse */
     $("#identificacion").on('click', function () {
@@ -104,14 +51,7 @@ $(function ($) {
         $("#collapsePsico").collapse("hide");
         $("#collapseAntecedentes").collapse("hide");
     });
-    // /**Ocultar inputs hostpitalizacion */
-    // if( $('#hospitalizacion').prop('checked') ) {
-    //     console.log("entro 1");
-    //    $("#hospitalizacion_fisica").show();
-    //    $("#hospitalizacion_fisica").fadeIn("200");
-    // }else{
-    //     $("#hospitalizacion_fisica").hide();
-    // }
+
     var hospitalizacion = $("#hospitalizacion");
     var hospitalizacion_fisica = $("#hospitalizacion_fisica");
     hospitalizacion_fisica.hide();
@@ -150,42 +90,6 @@ $(function ($) {
         }
     });
 
-    // $("#gridExpediente").bootstrapTable({
-    //     url: get_expediente,
-    //     classes: "table-striped",
-    //     method: "post",
-    //     contentType: "application/x-www-form-urlencoded",
-
-    //     pagination: true,
-    //     pageSize: 10,
-    //     detailView: true,
-    //     columns: [{
-    //         field: "id",
-    //         title: "ID",
-    //         visible: false,
-    //     }, {
-    //         field: "code_user",
-    //         title: "Codigo Usuario",
-    //         visible: true,
-    //     }, {
-    //         field: "numero_control",
-    //         title: "Numero Expediente",
-    //         visible: true,
-    //     }, {
-    //         field: "name",
-    //         title: "Cliente",
-    //         visible: true,
-    //     }, {
-    //         field: "cedicion",
-    //         title: "Acciones",
-    //         formatter: "editFormatter",
-    //     }],
-    //     onLoadSuccess: function (data) { },
-    //     onExpandRow: function (index, row, $detail) {
-    //         indexp = index;
-    //         expandTable(row, $detail.html("<table class='table table-striped table-bordered' cellspacing='0'></table>").find("table"));
-    //     },
-    // });
 
 
 

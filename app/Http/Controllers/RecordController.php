@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\PsychobiologicalHabits;
 use App\Models\Record;
-
 use App\Models\RecordPhoto;
 use App\Models\User;
 use App\Models\WeightControl;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use PDF;
@@ -39,7 +37,7 @@ class RecordController extends Controller
     public function getUserCode(Request $request)
     {
         $lstDatos = User::where('name', $request->name)
-        ->get();
+            ->get();
         return $lstDatos;
     }
     public function getList(Request $requestd)
@@ -396,7 +394,7 @@ class RecordController extends Controller
             ->join('psychobiological_habits', 'psychobiological_habits.records_id', '=', 'psychobiological_habits.id')
             ->orderBy('users.code_user', 'desc')
             ->where('records.users_id', $id)
-            //->where('records.id', $id)
+        //->where('records.id', $id)
 
             ->latest('records.created_at')
             ->first();
@@ -581,11 +579,11 @@ class RecordController extends Controller
         // DB::commit();
 
         /*} catch (\Throwable $th) {
-            //dd($th);
-            DB::rollBack();
+    //dd($th);
+    DB::rollBack();
 
-            return back()->with('error', 'Hubo un error al agregar los datos. Verifique los datos.');
-        }*/
+    return back()->with('error', 'Hubo un error al agregar los datos. Verifique los datos.');
+    }*/
     }
 
     /**

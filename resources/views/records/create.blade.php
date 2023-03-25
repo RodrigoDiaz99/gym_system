@@ -661,7 +661,7 @@
                                             <span
                                                 class="input-group-text @error('room.type') border border-danger text-danger @enderror"><i
                                                     class="ni ni-zoom-split-in"></i></span>
-                                            <input class="form-control" name="tabaco" id="tabaco" type="text"
+                                            <input class="form-control" name="tabaco" id="tabaco" type="number"
                                                 autocomplete="off" value="{{old('tabaco')}}">
 
                                         </div>

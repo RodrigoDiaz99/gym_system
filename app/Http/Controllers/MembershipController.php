@@ -23,7 +23,13 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        $Membership = Membership::orderBy('id', 'asc')->paginate(10);
+        $Membership = MemberShipMembershipPay::join('memberships as a', 'membership_membership_pays.memberships_id', '=', 'a.id')
+            ->join('membership_pays as b', 'membership_membership_pays.membership_pays_id', '=', 'b.id')
+            ->join('membership_types as c', 'a.membership_types_id', '=', 'c.id')
+            ->join('users as d', 'a.users_id', '=', 'd.id')
+            ->select('a.id', 'a.init_date', 'a.expiration_date', 'a.created_at', 'b.reference_line', 'b.estatus', 'd.name as user_name', 'c.name as type_name')
+            ->paginate(20);
+
         $membership_types = MembershipType::all();
         $clients = User::role('Cliente')->get();
 
@@ -40,9 +46,9 @@ class MembershipController extends Controller
                 ->where('memberships.estatus_membresia', 1)
 
                 ->first();
-                if(is_null($validacion)){
-                    throw new Exception("Usted no cuenta con una membresia o ya esta caducada, compre una nueva");
-                }
+            if (is_null($validacion)) {
+                throw new Exception("Usted no cuenta con una membresia o ya esta caducada, compre una nueva");
+            }
 
             return response()->json([
                 'lSuccess' => true,
@@ -82,44 +88,36 @@ class MembershipController extends Controller
 
             DB::beginTransaction();
 
-            $Membership = Membership::create([
+            $membershipType = MembershipType::findOrFail($request->membership_type);
+
+            $membership = Membership::create([
                 'users_id' => $request->users_id,
                 'init_date' => Carbon::now()->format('Y-m-d'),
-                'membership_types_id' => $request->membership_type,
+                'membership_types_id' => $membershipType->id,
                 'carts_id' => '',
                 'asigned_by' => Auth::id(),
+                'expiration_date' => Carbon::now()->addDays($membershipType->days)->format('Y-m-d'),
             ]);
 
-            $type = MembershipType::where('id', $Membership->membership_types_id)->first();
-            $fecha_inicio = $Membership->init_date;
-            $dias = (int) $type->days;
-            $fecha_vencimiento = date('Y-m-d', strtotime($fecha_inicio . ' +' . $dias . ' days'));
-            Membership::where('id', $Membership->id)
-                ->update(
-                    ['expiration_date' => $fecha_vencimiento]
-
-                );
             $pay = MembershipPay::create([
-                'reference_line' => $Membership->id . $reference . "M",
+                'reference_line' => $membership->id . $reference . "M",
             ]);
 
-            $pay_membership = MemberShipMembershipPay::create([
-                'memberships_id' => $Membership->id,
-                'membership_pays_id' => $pay->id,
-            ]);
+            $membershipPays = [
+                [
+                    'memberships_id' => $membership->id,
+                    'membership_pays_id' => $pay->id,
+                ],
+            ];
 
-            // $pivot = MemberShipMembershipPay::create([
-            //     'memberships_id' => $Membership->id,
-            //     'membership_pays_id' => $pay->id,
-            // ]);
+            MemberShipMembershipPay::insert($membershipPays);
+
             DB::commit();
 
             $origenMembresias = true;
             $referenciaMembresia = $pay->reference_line;
-            // dd();
-            //return redirect()->back()->with('success', 'Registro Éxitoso!');
-            return redirect()->route('sales.point2', compact('origenMembresias', 'referenciaMembresia','ip'));
-            // return view('sales.sale', compact('origenMembresias','referenciaMembresia'));
+
+            return redirect()->route('sales.point2', compact('origenMembresias', 'referenciaMembresia', 'ip'));
 
         } catch (Exception $e) {
             DB::rollback();
@@ -170,10 +168,29 @@ class MembershipController extends Controller
      */
     public function destroy($id)
     {
+
         try {
-            Membership::find($id)->delete();
+            $membership = MemberShipMembershipPay::join('memberships as a', 'membership_membership_pays.memberships_id', '=', 'a.id')
+                ->join('membership_pays as b', 'membership_membership_pays.membership_pays_id', '=', 'b.id')
+                ->join('membership_types as c', 'a.membership_types_id', '=', 'c.id')
+
+                ->where('a.id', $id)
+                ->first();
+
+            MembershipPay::where('id', $membership->membership_pays_id)->update([
+                'estatus' => "C",
+            ]);
+            $membership->update([
+                'estatus' => "C",
+            ]);
+            Membership::where('id', $membership->memberships_id)->update([
+                'deleted_at' => Carbon::now(),
+                'estatus_membresia' => 1,
+
+            ]);
             return redirect()->back()->with('success', 'Eliminación Éxitosa!');
         } catch (Exception $e) {
+
             return redirect()->back()->with('error', 'Hubo un problema, porfavor Intente nuevamente!');
         }
     }

@@ -30,55 +30,77 @@
                                 <table class="table table-bordered table-striped align-items-center mb-0 text-center">
                                     <thead>
                                         <tr>
+                                            <th>Linea Referencia</th>
                                             <th>Miembro</th>
                                             <th>Tipo</th>
                                             <th>Desde</th>
                                             <th>Vigencia</th>
                                             <th>Fecha</th>
+                                            <th>Estatus Pago</th>
+
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($Membership as $membership)
                                             <tr>
-                                                <td class="text-bold-500">{{ $membership->user->name }}</td>
+                                                <td class="text-bold-500">{{ $membership->reference_line }}</td>
+                                                <td class="text-bold-500">{{ $membership->user_name }}</td>
 
-                                                <td>{{ $membership->MembershipType->name }}</td>
+                                                <td>{{ $membership->type_name }}</td>
 
-                                                <td>{{ $membership->min('init_date') }}</td>
-
-                                                <td>{{ $membership->max('expiration_date') }}</td>
+                                                <td>{{ $membership->init_date }}</td>
+                                                <td>{{ $membership->expiration_date }}</td>
 
                                                 <td>{{ $membership->created_at }}</td>
+                                                @switch($membership->estatus)
+                                                    @case('PE')
+                                                        @php
+                                                            $status = 'Pendiente Pago';
+                                                        @endphp
+                                                    @break
 
-                                                <td class="text-bold-500" style="width: 150px;">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="pe-1">
-                                                            <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#membershiptype-{{ $membership->id }}"
-                                                                title="Editar membresia">
+                                                    @case('P')
+                                                        @php
+                                                            $status = 'Pagado';
+                                                        @endphp
+                                                    @break
 
-                                                                <i class="bi bi-pencil"></i></button>
+                                                    @default
+                                                        @php
+                                                            $status = 'Cancelado';
+                                                        @endphp
+                                                @endswitch
 
-                                                            @include('Membership.modals.edit')
-                                                        </div>
-
-
-                                                        <div>
-                                                            <form
-                                                                action="{{ route('Membership-type.destroy', $membership->id) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-icon btn-danger"
-                                                                    title="Eliminar membresia">
-                                                                    <i class="bi bi-trash"></i>
+                                                <td>{{ $status }}</td>
+                                                @if ($membership->estatus == 'PE')
+                                                    <td class="text-bold-500" style="width: 150px;">
+                                                        <div class="d-flex justify-content-center">
+                                                            {{-- <div class="pe-1">
+                                                                <button type="button" class="btn btn-icon btn-primary"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#membership-{{ $membership->id }}"
+                                                                    title="Editar membresia">
+                                                                    <i class="bi bi-pencil"></i>
                                                                 </button>
-                                                            </form>
+                                                                @include('Membership.modals.edit')
+                                                            </div> --}}
+                                                            <div>
+                                                                <form
+                                                                    action="{{ route('Membership.destroy', $membership->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-icon btn-danger"
+                                                                        title="cancelar membresia">
+                                                                        <i class="bi bi-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
+                                                @endif
+
                                             </tr>
                                         @endforeach
                                     </tbody>

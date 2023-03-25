@@ -16,8 +16,10 @@ class Membership extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id','users_id', 'membership_types_id', 'init_date', 'expiration_date', 'asigned_by'];
 
+    protected $fillable = ['id','users_id', 'membership_types_id', 'init_date', 'expiration_date', 'asigned_by'];
+    protected $table = "memberships";
+    protected $dates = ['deleted_at'];
     /**
      * Get the MembershipType associated with the Membership
      *
