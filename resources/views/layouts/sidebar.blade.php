@@ -134,11 +134,23 @@
                     <span>Clientes</span>
                 </a>
             </li>
-            <li class="sidebar-item  ">
+            <li class="sidebar-item has-sub">
                 <a href="{{ route('colaboradores.index') }}" class="sidebar-link">
                     <i class="bi bi-person-bounding-box"></i>
-                    <span>Empleados</span>
+                    <span>Colaboradores</span>
                 </a>
+                <ul class="submenu" style="display: none;">
+                    <li class="submenu-item">
+
+                        <a href="" class="sidebar-link"> <i class="bi bi-list-ul"></i>
+                            <span>Puestos</span></a>
+
+                    </li>
+
+
+
+
+                </ul>
             </li>
             <li class="sidebar-item  ">
                 <a href="{{ route('record.index') }}" class="sidebar-link">

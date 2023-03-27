@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class CollaboratorsController extends Controller
 {
@@ -18,8 +21,9 @@ class CollaboratorsController extends Controller
             ->withTrashed()
             ->paginate(10);
 
-            $roles = $user->getRoleNames();
-        return view('Collaborators.index', compact('collaborators'));
+            $roles = Role::where('name','!=','cliente')->get();
+            $permissions = Permission::all();
+        return view('Collaborators.index', compact('collaborators','roles','permissions'));
     }
 
     /**
@@ -40,7 +44,78 @@ class CollaboratorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'string',
+                'max:255',
+                'surnames' => 'required',
+                'string',
+                'max:255',
+                'email' => 'required|unique:users|string',
+                'phone' => 'required|max:10',
+                'contact_phone' => 'required|max:10',
+                'ocupation' => 'required',
+                'born' => 'required',
+            ],
+            [
+                'name.required' => 'El campo de nombre es obligatorio',
+                'name.string' => 'El campo de nombre debe ser texto',
+                'surnames.required' => 'El campo de apellidos es obligatorio',
+                'email.required' => 'El campo de email es obligatorio',
+                'email.unique' => 'El campo de email es unico',
+                'phone.required' => 'El campo de telefono es obligatorio',
+                'contact_phone.required' => 'El campo de número de contacto es obligatorio',
+                'ocupation.required' => 'El campo de ocupacion es obligatorio',
+                'born.required' => 'El campo de fecha de nacimiento es obligatorio',
+            ],
+        );
+        if ($validator->fails()) {
+            $error = $validator->errors()->all();
+
+            foreach ($error as $validador) {
+                return redirect()
+                    ->back()
+                    ->with('error', $validador)
+                    ->withInput();
+            }
+        } else {
+            try {
+
+
+                $name = explode(' ', $request->name);
+                $surnames = explode(' ', $request->surnames);
+                $user = User::create([
+                    'name' => $request->get('name'),
+                    'surnames' => $request->get('surnames'),
+                    'username' => $name[0] . '.' . $surnames[0] .".".$surnames[1],
+                    'code_user' => 0,
+                    'email' => $request->get('email'),
+                    'phone' => $request->get('phone'),
+
+                    'cargo' => $request->get('cargo'),
+
+                    'password' => Hash::make('123456'),
+                ]);
+
+                $user->assignRole('cliente');
+                $user_code = User::where('id', $user->id)->first();
+
+                $us = User::where('id', $user_code->id)->update([
+                    'code_user' => '000' . $user_code->id,
+                ]);
+
+                return back()->with('success', '¡Se agrego el usuario de forma exitosa!');
+            } catch (\Throwable $th) {
+                return redirect()
+                    ->back()
+                    ->with('error', $th->getMessage())
+                    ->withInput();
+            }
+        }
+
+
     }
 
     /**

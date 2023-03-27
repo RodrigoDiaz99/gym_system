@@ -119,19 +119,7 @@ class UserController extends Controller
             }
         }
 
-        // } catch (\Throwable $th) {
 
-        //     $errors = new BitacoraError();
-        //     $json_encode = $th->getMessage();
-        //     $errors->error = $json_encode;
-        //     $errors->modulo = "users_clients";
-        //     $errors->save();
-        //     return redirect()
-        //     ->back()
-        //     ->with('error', 'Verifique la informacion o contacte con soporte')
-        //     ->withInput();
-        //     // return back()->with('success', '¡Se agrego el usuario de forma exitosa!');
-        // }
     }
 
     /**

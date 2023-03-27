@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('contact_phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-
+            $table->string('cargo')->nullable();
             $table->string('password');
             $table->text('biometric_entry')->nullable();
             $table->string('path_perfil')->default('img/profile.png')->nullable()->comment('Estos datos se necesitan obligatorios al momento de crear el expediente');
@@ -32,6 +32,9 @@ class CreateUsersTable extends Migration
             $table->string('age')->nullable()->comment('Estos datos se necesitan obligatorios al momento de crear el expediente');
             $table->date('born')->nullable()->comment('Estos datos se necesitan obligatorios al momento de crear el expediente');
             $table->boolean('expediente')->default(0);
+            $table->boolean('client')->nullable();
+            $table->boolean('collaborator')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -164,7 +164,7 @@ return [
          * Package Service Providers...
          */
        // Barryvdh\Debugbar\ServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
+       Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */
