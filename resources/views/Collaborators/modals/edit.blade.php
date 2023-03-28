@@ -1,4 +1,4 @@
-<div class="modal fade" id="editCollaborator" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCollaborator-{{$collaborator->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +7,7 @@
                 </button>
             </div>
 
-            <form action="{{ route('Colaboradores.update', $product->id) }}" method="POST">
+            {{-- <form action="{{ route('Colaboradores.update', $collaborator->id) }}" method="POST">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -26,7 +26,7 @@
                                     </span>
                                     <input class="form-control @error('product_name') is-invalid @enderror"
                                         type="text" name="product_name"
-                                        value="{{ old('product_name', $product->name) }}" placeholder="Nombre Producto">
+                                        value="{{ old('product_name', $collaborator->name) }}" placeholder="Nombre Producto">
                                 </div>
                                 @error('product_name')
                                     <strong class="text-danger">{{ $message }}</strong>
@@ -135,7 +135,7 @@
                         aria-label="Close">Cancelar</button>
                     <button type="submit" class="btn btn-warning"><strong>EDITAR</strong></button>
                 </div>
-            </form>
+            </form> --}}
         </div>
     </div>
 </div>

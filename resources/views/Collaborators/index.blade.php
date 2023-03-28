@@ -32,10 +32,10 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Departamento</th>
+
                                             <th>Role</th>
                                             <th>Permisos</th>
-                                            <th>Fecha</th>
+
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -46,23 +46,29 @@
                                                     {{ $collaborator->name }}<br>
                                                 </td>
 
-                                                <td class="text-bold-500">{{ $collaborator }}</td>
+                                                <td class="text-bold-500">{{ $collaborator->roles()->first()->name }}</td>
 
                                                 <td class="text-bold-500">
-
+                                                    {{ $collaborator->permissions()->first() }}
                                                 </td>
 
-                                                <td class="text-bold-500">
 
-                                                </td>
 
-                                                <td>{{ $collaborator->created_at->toDateString() }}</td>
 
                                                 <td class="text-bold-500" style="width: 150px;">
                                                     <div class="d-flex justify-content-center">
-                                                        <div class="pe-1">
+                                                        <div>
                                                             <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal" data-bs-target="#editcollaborator"
+                                                            data-bs-toggle="modal" data-bs-target="#permisosCollaborator-{{$collaborator->id}}"
+                                                            title="Agregar Permisos">
+
+                                                            <i class="bi bi-key"></i></button>
+
+                                                        @include('Collaborators.modals.permisos')
+                                                        </div>
+                                                        <div class="">
+                                                            <button type="button" class="btn btn-icon btn-primary"
+                                                                data-bs-toggle="modal" data-bs-target="#editcollaborator-{{$collaborator->id}}"
                                                                 title="Editar Colaborador">
 
                                                                 <i class="bi bi-pencil"></i></button>

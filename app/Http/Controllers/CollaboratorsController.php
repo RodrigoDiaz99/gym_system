@@ -17,13 +17,13 @@ class CollaboratorsController extends Controller
      */
     public function index()
     {
-        $collaborators = User::role('Empleado')
-            ->withTrashed()
-            ->paginate(10);
+        $collaborators = User::whereHas("roles", function ($q) {
+            $q->where("name", '!=', "clientes");
+        })->paginate(15);
 
-            $roles = Role::where('name','!=','cliente')->get();
-            $permissions = Permission::all();
-        return view('Collaborators.index', compact('collaborators','roles','permissions'));
+        $roles = Role::where('name', '!=', 'cliente')->get();
+        $permissions = Permission::all();
+        return view('Collaborators.index', compact('collaborators', 'roles', 'permissions'));
     }
 
     /**
@@ -83,13 +83,12 @@ class CollaboratorsController extends Controller
         } else {
             try {
 
-
                 $name = explode(' ', $request->name);
                 $surnames = explode(' ', $request->surnames);
                 $user = User::create([
                     'name' => $request->get('name'),
                     'surnames' => $request->get('surnames'),
-                    'username' => $name[0] . '.' . $surnames[0] .".".$surnames[1],
+                    'username' => $name[0] . '.' . $surnames[0] . "." . $surnames[1],
                     'code_user' => 0,
                     'email' => $request->get('email'),
                     'phone' => $request->get('phone'),
@@ -114,7 +113,6 @@ class CollaboratorsController extends Controller
                     ->withInput();
             }
         }
-
 
     }
 
