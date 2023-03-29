@@ -22,7 +22,8 @@ class CollaboratorsController extends Controller
         })->paginate(15);
 
         $roles = Role::where('name', '!=', 'cliente')->get();
-        $permissions = Permission::all();
+        $permissions = Permission::get();
+
         return view('Collaborators.index', compact('collaborators', 'roles', 'permissions'));
     }
 

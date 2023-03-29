@@ -57,26 +57,27 @@
 
                                                 <td class="text-bold-500" style="width: 150px;">
                                                     <div class="d-flex justify-content-center">
-                                                        <div>
+                                                        <div class="pe-1">
                                                             <button type="button" class="btn btn-icon btn-primary"
-                                                            data-bs-toggle="modal" data-bs-target="#permisosCollaborator-{{$collaborator->id}}"
-                                                            title="Agregar Permisos">
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#permisosCollaborator-{{ $collaborator->id }}"
+                                                                title="Agregar Permisos">
 
-                                                            <i class="bi bi-key"></i></button>
+                                                                <i class="bi bi-key"></i></button>
 
-                                                        @include('Collaborators.modals.permisos')
+                                                            @include('Collaborators.modals.permisos')
                                                         </div>
-                                                        <div class="">
+                                                        <div class="pe-1">
                                                             <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal" data-bs-target="#editcollaborator-{{$collaborator->id}}"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#editcollaborator-{{ $collaborator->id }}"
                                                                 title="Editar Colaborador">
 
                                                                 <i class="bi bi-pencil"></i></button>
 
                                                             @include('Collaborators.modals.edit')
                                                         </div>
-
-                                                        <div>
+                                                        <div class="pe-1">
                                                             <form
                                                                 action="{{ route('colaboradores.destroy', $collaborator->id) }}"
                                                                 method="post">
@@ -108,3 +109,8 @@
     {{-- section modales --}}
     @include('Collaborators.modals.create')
 @endsection
+@section('scripts')
+
+    <script src="{{ asset('js_modulos/permisos.js') }}"></script>
+@endsection
+

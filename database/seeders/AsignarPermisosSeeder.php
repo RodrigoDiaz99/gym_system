@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 
-class PermissionTableSeeder extends Seeder
+class AsignarPermisosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,32 +13,21 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'venta']);
-        Permission::create(['name' => 'corte_caja']);
-        Permission::create(['name' => 'inventario']);
-        Permission::create(['name' => 'clientes']);
-        Permission::create(['name' => 'colaboradores']);
-        Permission::create(['name' => 'expedientes']);
-        Permission::create(['name' => 'crear']);
-        Permission::create(['name' => 'eliminar']);
-        Permission::create(['name' => 'editar']);
-        Permission::create(['name' => 'restaurar']);
-        $estadistica = Permission::create(['name' => 'estadisticas']);
+         $estadistica = Permission::create(['name' => 'estadisticas']);
         $productos_vendidos = Permission::create(['name' => 'productos_vendidos']);
         $membresias_vendidas = Permission::create(['name' => 'membresias_vendidas']);
         $mayores_ventas = Permission::create(['name' => 'mayores_ventas']);
 
-        $estadistica->givePermissionTo(
+        $estadistica->syncPermissions([
             $productos_vendidos,
             $membresias_vendidas,
-            $mayores_ventas
-
-        );
+            $mayores_ventas,
+        ]);
 
         $membresias = Permission::create(['name' => 'membresias']);
         $ver = Permission::create(['name' => 'ver_membresias']);
         $tipo = Permission::create(['name' => 'tipo_membresias']);
-        $membresias->givePermissionTo([
+        $membresias->syncPermissions([
             $ver,
             $tipo,
 
@@ -50,7 +38,7 @@ class PermissionTableSeeder extends Seeder
         $categorias = Permission::create(['name' => 'categorias']);
         $unidades = Permission::create(['name' => 'unidades']);
         $proveedores = Permission::create(['name' => 'proveedores']);
-        $productos->givePermissionTo([
+        $productos->syncPermissions([
             $ver_productos,
             $categorias,
             $unidades,
@@ -63,7 +51,7 @@ class PermissionTableSeeder extends Seeder
         $cancelacion = Permission::create(['name' => 'bitacoras_cancelacion']);
         $ventas = Permission::create(['name' => 'bitacoras_ventas']);
 
-        $bitacoras->givePermissionTo([
+        $bitacoras->syncPermissions([
             $acceso,
             $cancelacion,
             $ventas,
