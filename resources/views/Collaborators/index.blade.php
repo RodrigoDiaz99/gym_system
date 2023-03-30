@@ -108,9 +108,8 @@
     </div>
     {{-- section modales --}}
     @include('Collaborators.modals.create')
-@endsection
-@section('scripts')
-
-    <script src="{{ asset('js_modulos/permisos.js') }}"></script>
+    <script>
+        var permissions = {!! $permissions !!};
+    </script>
 @endsection
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -22,7 +23,13 @@ class CollaboratorsController extends Controller
         })->paginate(15);
 
         $roles = Role::where('name', '!=', 'cliente')->get();
-        $permissions = Permission::get();
+        $permissions = Permission::selectRaw('numero_categoria, categoria, GROUP_CONCAT(sub_name) as nombres')
+        ->select('id')
+    ->groupBy('numero_categoria', 'categoria')
+    ->orderBy('numero_categoria')
+    ->get();
+
+dd($permissions);
 
         return view('Collaborators.index', compact('collaborators', 'roles', 'permissions'));
     }

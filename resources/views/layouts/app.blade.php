@@ -31,6 +31,13 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
+    <!-- Estilos de jsTree -->
+<link href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/themes/default/style.min.css" rel="stylesheet" />
+<!-- Librería jQuery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Librería jsTree -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.11/jstree.min.js"></script>
+
 </head>
 
 <body>
