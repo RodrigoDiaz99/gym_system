@@ -15,6 +15,7 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
+        //estas son rutas
         Permission::create(['name' => 'venta', 'categoria' => 'vender', 'numero_categoria' => 1, 'sub_name' => 'Venta']);
         Permission::create(['name' => 'corte_caja', 'categoria' => 'corte_caja', 'numero_categoria' => 2, 'sub_name' => 'Corte de Caja']);
 
