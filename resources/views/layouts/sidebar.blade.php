@@ -60,7 +60,6 @@
                                                     <span>Productos mas vendidos</span>
                                                 </a>
                                             @break
-
                                             @case('membresias_vendidas')
                                                 <a href="{{ route('bestSellers.index') }}" class="sidebar-link">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -86,8 +85,6 @@
                                             @break
                                         @endswitch
                                     </li>
-
-
                                 </ul>
                             </div>
                         @break
@@ -98,7 +95,6 @@
                                     <i class="bi bi-credit-card-fill"></i>
                                     <span>Membres&iacute;as</span>
                                 </a>
-
                                 <ul class="submenu" style="display: none;">
                                     @switch($ls->name)
                                         @case('ver_membresias')
@@ -118,9 +114,6 @@
                                             </li>
                                         @break
                                     @endswitch
-
-
-
                                 </ul>
                             </li>
                         @break
