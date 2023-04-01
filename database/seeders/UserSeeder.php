@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -24,7 +25,8 @@ class UserSeeder extends Seeder
             'email' => 'it@domain.com',
             'phone' => '9999708319',
             'password' => Hash::make('administradorrod'),
-        ])->assignRole(1);
+        ])->assignRole(1)->givePermissionTo(14);
+
 
 
 

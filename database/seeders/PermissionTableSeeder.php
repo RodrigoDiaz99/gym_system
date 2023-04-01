@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
@@ -41,6 +42,7 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['name' => 'eliminar', 'categoria' => 'generales', 'numero_categoria' => 11, 'sub_name' => 'Eliminar Registros']);
         Permission::create(['name' => 'editar', 'categoria' => 'generales', 'numero_categoria' => 11, 'sub_name' => 'Editar Registros']);
         Permission::create(['name' => 'restaurar', 'categoria' => 'generales', 'numero_categoria' => 11, 'sub_name' => 'Restaurar Registros']);
+
 
     }
 }
