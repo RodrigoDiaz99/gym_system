@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -23,13 +22,7 @@ class CollaboratorsController extends Controller
         })->paginate(15);
 
         $roles = Role::where('name', '!=', 'cliente')->get();
-        $permissions = Permission::selectRaw('numero_categoria, categoria, GROUP_CONCAT(sub_name) as nombres')
-        ->select('id')
-    ->groupBy('numero_categoria', 'categoria')
-    ->orderBy('numero_categoria')
-    ->get();
-
-dd($permissions);
+        $permissions = Permission::get();
 
         return view('Collaborators.index', compact('collaborators', 'roles', 'permissions'));
     }
@@ -130,6 +123,27 @@ dd($permissions);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function asignarPermisos(Request $request)
+    {
+try {
+    $user = User::where('id',$request->id_user)->first();
+
+    foreach($request->permissions as $permisos){
+
+        $user->givePermissionTo($permisos);
+    }
+    return back()->with('success','Se agregaron los permisos al usuario '. $user->name.' de manera correcta');
+} catch (\Throwable $th) {
+    return back()->with('error','hubo algun problema al agregar los permisos');
+}
+
+
+
+        // Obtener los identificadores de los nodos seleccionados
+
+
+        // Realizar operaciones con los nodos seleccionados
+    }
     public function show($id)
     {
         //

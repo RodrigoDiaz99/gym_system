@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CorteCaja;
+use App\Models\Permission;
+use App\Models\User;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -63,7 +65,9 @@ class HomeController extends Controller
                 ->select('corte_cajas.lActivo', 'corte_cajas.user_id', 'corte_cajas.cantidad_inicial', 'vouchers.price_total')
                 ->count();
 
-            return view('sales.sale', compact('origenMembresias', 'referenciaMembresia', 'cConsulta', 'corteCount', 'excedido','ip'));
+
+
+            return view('sales.sale', compact('origenMembresias', 'referenciaMembresia', 'cConsulta', 'corteCount', 'excedido', 'ip'));
         } catch (\Throwable $th) {
             return redirect()->back();
         }
@@ -102,7 +106,7 @@ class HomeController extends Controller
             ->where('corte_cajas.lActivo', true)
             ->select('corte_cajas.lActivo', 'corte_cajas.user_id', 'corte_cajas.cantidad_inicial', 'vouchers.price_total')
             ->count();
-        return view('sales.sale', compact('origenMembresias', 'referenciaMembresia', 'cConsulta', 'corteCount','excedido','ip'));
+        return view('sales.sale', compact('origenMembresias', 'referenciaMembresia', 'cConsulta', 'corteCount', 'excedido', 'ip'));
     }
     public function home()
     {

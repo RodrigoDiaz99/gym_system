@@ -52,23 +52,27 @@
                                                         <td class="text-bold-500">
                                                             <div class="row">
                                                                 <div class="col-md-4">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#editColaborator-{{ $worker->id }}"
-                                                                        title="Editar Colaborador">
+                                                                    @can('editar')
+                                                                        <button type="button" class="btn btn-primary"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#editColaborator-{{ $worker->id }}"
+                                                                            title="Editar Colaborador">
 
-                                                                        <i class="bi bi-pencil"></i></a>
+                                                                            <i class="bi bi-pencil"></i></button>
                                                                         @include('Workers.modales.edit')
+                                                                    @endcan
+
                                                                 </div>
 
                                                                 <div class="col-md-4">
+
                                                                     <button type="button" class="btn btn-warning"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#editPermisisons-{{ $worker->id }}"
                                                                         title="Editar Permissions">
 
-                                                                        <i class="bi bi-pencil"></i></a>
-                                                                        @include('Workers.modales.permissions')
+                                                                        <i class="bi bi-pencil"></i></button>
+                                                                    @include('Workers.modales.permissions')
                                                                 </div>
 
                                                                 <div class="col-md-4">

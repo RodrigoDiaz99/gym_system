@@ -32,51 +32,48 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         @foreach ($corte_caja as $row)
+                                        @foreach ($corte_caja as $row)
                                             <tr>
 
-                                                <td class="text-bold-500">{{$row->name}}</td>
-                                                <td class="text-bold-500">$ {{$row->cantidad_inicial }}</td>
+                                                <td class="text-bold-500">{{ $row->name }}</td>
+                                                <td class="text-bold-500">$ {{ $row->cantidad_inicial }}</td>
 
-                                                <td class="text-bold-500">$ {{$row->cantidad_final }}</td>
+                                                <td class="text-bold-500">$ {{ $row->cantidad_final }}</td>
 
-                                                <td class="text-bold-500">{{ $row->fecha_inicio }} {{ $row->hora_inicio}}</td>
+                                                <td class="text-bold-500">{{ $row->fecha_inicio }} {{ $row->hora_inicio }}
+                                                </td>
 
-                                                <td>{{ $row->fecha_final }} {{ $row->hora_final}}</td>
+                                                <td>{{ $row->fecha_final }} {{ $row->hora_final }}</td>
                                                 <td>{{ $row->total_venta }} </td>
-                                                <td>{{ $row->diferencia}} </td>
-                                                @if ( $row->lActivo == 1)
-
-                                                <td>Activo </td>
+                                                <td>{{ $row->diferencia }} </td>
+                                                @if ($row->lActivo == 1)
+                                                    <td>Activo </td>
                                                 @else
-                                                <td>Inactivo</td>
+                                                    <td>Inactivo</td>
                                                 @endif
 
 
 
 
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
                             </div>
+                            </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center">
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
 
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
     {{-- section modales --}}
-
 @endsection
 @section('scripts')
-<script src="{{asset('js_modulos/product.js')}}">
-
-</script>
+    <script src="{{ asset('js_modulos/product.js') }}"></script>
 @endsection

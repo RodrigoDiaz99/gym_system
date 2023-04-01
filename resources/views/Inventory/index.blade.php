@@ -7,16 +7,18 @@
         <header class="card px-2 py-4">
             <div class="d-flex justify-content-between align-items-center px-2">
                 <h3 class="h2">Inventario Productos</h3>
+                @can('crear')
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        <span class="btn-inner--text">Agregar Inventario</span>
+                    </button>
+                @endcan
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInventory">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                        <path
-                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                    <span class="btn-inner--text">Agregar Inventario</span>
-                </button>
             </div>
 
         </header>
@@ -63,25 +65,33 @@
                                                 <td class="text-bold-500" style="width: 150px;">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="pe-1">
-                                                            <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal" data-bs-target="#editInventory-{{$inventory->id}}"
-                                                                title="Editar producto">
+                                                            @can('editar')
+                                                                <button type="button" class="btn btn-icon btn-primary"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#editInventory-{{ $inventory->id }}"
+                                                                    title="Editar producto">
 
-                                                                <i class="bi bi-pencil"></i></button>
+                                                                    <i class="bi bi-pencil"></i></button>
+                                                                @include('Inventory.modals.edit')
+                                                            @endcan
 
-                                                            @include('Inventory.modals.edit')
+
+
                                                         </div>
 
                                                         <div class="pe-1">
-                                                            <button type="button" class="btn btn-icon btn-secondary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#updateInventoryStatus-{{$inventory->id}}"
-                                                                title="Editar Estado Inventario">
+                                                            @can('editar')
+                                                                <button type="button" class="btn btn-icon btn-secondary"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#updateInventoryStatus-{{ $inventory->id }}"
+                                                                    title="Editar Estado Inventario">
 
-                                                                <i class="bi bi-pencil"></i></button>
-                                                            </button>
+                                                                    <i class="bi bi-pencil"></i></button>
+                                                                </button>
 
-                                                            @include('Inventory.modals.status')
+                                                                @include('Inventory.modals.status')
+                                                            @endcan
+
                                                         </div>
 
                                                         {{-- <div>
