@@ -4,9 +4,11 @@
     $user = User::where('id', Auth::id())->first();
     $permisos = $user->getPermissionNames();
 
-    $datapermisos = Permission::whereIn('name', $permisos)
+    $data = Permission::whereIn('name', $permisos)
         ->orderBy('id')
+
         ->get();
+    $datapermisos = $data->groupBy('categoria');
 
 @endphp
 @if ($permisos->count())
@@ -25,41 +27,44 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                @foreach ($datapermisos as $ls)
-                    @switch($ls->categoria)
-                        @case('vender')
+                @foreach ($datapermisos as $lst => $permisos)
+                    @foreach ($permisos as $ls)
+                        @if ($ls->categoria == 'vender')
                             <li class="sidebar-item active">
                                 <a href="{{ route('sales.point') }}" class="sidebar-link" style="background:#F25D50;">
                                     <i class="bi bi-cart-check"></i>
                                     <span>Venta</span>
                                 </a>
                             </li>
-                        @break
-
-                        @case('corte_caja')
+                        @endif
+                        @if ($ls->categoria == 'corte_caja')
                             <li class="sidebar-item">
                                 <a href="{{ route('corte.caja') }}" class="sidebar-link">
                                     <i class="bi bi-cash"></i>
                                     <span>Corte Caja</span>
                                 </a>
                             </li>
-                        @break
+                        @endif
+                    @endforeach
 
-                        @case('estadisticas')
-                            <div class="sidebar-item has-sub">
-                                <a href="#" class="sidebar-link">
-                                    <i class="bi bi-bar-chart"></i>
-                                    <span>Estadisticas</span>
-                                </a>
-                                <ul class="submenu" style="display: none;">
-                                    <li class="parent-li">
-                                        @switch($ls->name)
+
+                    @if ($ls->categoria == 'estadisticas')
+                        <div class="sidebar-item has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-bar-chart"></i>
+                                <span>Estadisticas</span>
+                            </a>
+                            <ul class="submenu" style="display: none;">
+                                <li class="parent-li">
+                                    @foreach ($permisos as $perm)
+                                        @switch($perm->name)
                                             @case('productos_vendidos')
                                                 <a href="{{ route('bestSellers.index') }}" class="sidebar-link">
                                                     <i class="bi bi-bar-chart-fill"></i>
                                                     <span>Productos mas vendidos</span>
                                                 </a>
                                             @break
+
                                             @case('membresias_vendidas')
                                                 <a href="{{ route('bestSellers.index') }}" class="sidebar-link">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -84,19 +89,24 @@
                                                 </a>
                                             @break
                                         @endswitch
-                                    </li>
-                                </ul>
-                            </div>
-                        @break
+                                    @endforeach
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
 
-                        @case('membresias')
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class="sidebar-link">
-                                    <i class="bi bi-credit-card-fill"></i>
-                                    <span>Membres&iacute;as</span>
-                                </a>
-                                <ul class="submenu" style="display: none;">
-                                    @switch($ls->name)
+
+
+
+                    @if ($ls->categoria == 'membresias')
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-credit-card-fill"></i>
+                                <span>Membres&iacute;as</span>
+                            </a>
+                            <ul class="submenu" style="display: none;">
+                                @foreach ($permisos as $lst)
+                                    @switch($lst->name)
                                         @case('ver_membresias')
                                             <li>
                                                 <a href="{{ route('Membership.index') }}" class="sidebar-link">
@@ -114,30 +124,32 @@
                                             </li>
                                         @break
                                     @endswitch
-                                </ul>
-                            </li>
-                        @break
+                                @endforeach
 
-                        @case('inventario')
-                            @can('inventario')
-                                <li class="sidebar-item">
-                                    <a href="{{ route('inventario.index') }}" class="sidebar-link">
-                                        <i class="bi bi-shop"></i>
-                                        <span>Inventario</span>
-                                    </a>
-                                </li>
-                            @endcan
-                        @break
-
-                        @case('productos')
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class="sidebar-link">
-                                    <i class="bi bi-card-list"></i>
-                                    <span>Productos</span>
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($ls->categoria == 'Inventario')
+                        @can('inventario')
+                            <li class="sidebar-item">
+                                <a href="{{ route('inventario.index') }}" class="sidebar-link">
+                                    <i class="bi bi-shop"></i>
+                                    <span>Inventario</span>
                                 </a>
+                            </li>
+                        @endcan
+                    @endif
 
-                                <ul class="submenu" style="display: none;">
-                                    @switch($ls->name)
+                    @if ($ls->categoria == 'productos')
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-card-list"></i>
+                                <span>Productos</span>
+                            </a>
+
+                            <ul class="submenu" style="display: none;">
+                                @foreach ($permisos as $products)
+                                    @switch($products->name)
                                         @case('ver_productos')
                                             <li class="submenu-item">
 
@@ -150,7 +162,8 @@
 
                                         @case('categorias')
                                             <li class="submenu-item">
-                                                <a href="{{ route('product-categories.index') }}"><i class="bi bi-bookmark-check"></i>
+                                                <a href="{{ route('product-categories.index') }}"><i
+                                                        class="bi bi-bookmark-check"></i>
                                                     <span>Categorías</span></a>
                                             </li>
                                         @break
@@ -172,26 +185,26 @@
                                             </li>
                                         @break
                                     @endswitch
+                                @endforeach
 
 
 
-                                </ul>
-                            </li>
-                        @break
 
-                        @case('clientes')
-                            @can('clientes')
+                            </ul>
+                        </li>
+                    @endif
+                    @foreach ($permisos as $lista)
+                        @switch($lista->categoria)
+                            @case('clientes')
                                 <li class="sidebar-item  ">
                                     <a href="{{ route('user.index') }}" class="sidebar-link">
                                         <i class="bi bi-person-badge-fill"></i>
                                         <span>Clientes</span>
                                     </a>
                                 </li>
-                            @endcan
-                        @break
+                            @break
 
-                        @case('colaboradores')
-                            @can('colaboradores')
+                            @case('colaboradores')
                                 <li class="sidebar-item">
                                     <a href="{{ route('colaboradores.index') }}" class="sidebar-link">
                                         <i class="bi bi-person-bounding-box"></i>
@@ -199,59 +212,57 @@
                                     </a>
 
                                 </li>
-                            @endcan
-                        @break
+                            @break
 
-                        @case('expediente')
-                            @can('expedientes')
-                                <li class="sidebar-item  ">
+                            @case('expediente')
+                                <li class="sidebar-item">
                                     <a href="{{ route('record.index') }}" class="sidebar-link">
                                         <i class="bi bi-list-check"></i>
                                         <span>Expedientes</span>
                                     </a>
                                 </li>
-                            @endcan
-                        @break
+                            @break
+                        @endswitch
+                    @endforeach
 
-                        @case('bitacora')
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class="sidebar-link">
-                                    <i class="bi bi-filter-square-fill"></i>
-                                    <span>Bitacoras</span>
-                                </a>
 
-                                <ul class="submenu" style="display: none;">
-                                    @switch($ls->name)
-                                        @case('bitacoras_acceso')
-                                            <li class="submenu-item">
+                    @if ($ls->categoria == 'membresias')
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-filter-square-fill"></i>
+                                <span>Bitacoras</span>
+                            </a>
 
-                                                <a href="{{ route('index.acceso') }}" class="sidebar-link"> <i
-                                                        class="bi bi-list-ul"></i>
-                                                    <span>Bitacora de accesos</span></a>
+                            <ul class="submenu" style="display: none;">
+                                @switch($ls->name)
+                                    @case('bitacoras_acceso')
+                                        <li class="submenu-item">
 
-                                            </li>
-                                        @break
+                                            <a href="{{ route('index.acceso') }}" class="sidebar-link"> <i
+                                                    class="bi bi-list-ul"></i>
+                                                <span>Bitacora de accesos</span></a>
 
-                                        @case('bitacoras_cancelacion')
-                                            <li class="submenu-item">
-                                                <a href="{{ route('bitacora.cancelacion') }}"><i class="bi bi-list-ul"></i>
-                                                    <span>Bitacora de cancelacion</span></a>
-                                            </li>
-                                        @break
+                                        </li>
+                                    @break
 
-                                        @case('bitacoras_ventas')
-                                            <li class="submenu-item">
-                                                <a href="{{ route('bitacora.ventas') }}"><i class="bi bi-graph-up-arrow"></i>
-                                                    <span>Bitacora Ventas</span></a>
-                                            </li>
-                                        @break
-                                    @endswitch
+                                    @case('bitacoras_cancelacion')
+                                        <li class="submenu-item">
+                                            <a href="{{ route('bitacora.cancelacion') }}"><i class="bi bi-list-ul"></i>
+                                                <span>Bitacora de cancelacion</span></a>
+                                        </li>
+                                    @break
 
-                                </ul>
-                            </li>
-                        @break
+                                    @case('bitacoras_ventas')
+                                        <li class="submenu-item">
+                                            <a href="{{ route('bitacora.ventas') }}"><i class="bi bi-graph-up-arrow"></i>
+                                                <span>Bitacora Ventas</span></a>
+                                        </li>
+                                    @break
+                                @endswitch
 
-                    @endswitch
+                            </ul>
+                        </li>
+                    @endif
                 @endforeach
 
 
