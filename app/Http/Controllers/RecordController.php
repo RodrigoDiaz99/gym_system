@@ -312,6 +312,7 @@ class RecordController extends Controller
                     ->with('success', '¡Se agrego el expediente del usuario de forma exitosa!');
             }
         } catch (\Throwable $th) {
+
             return back()->with('error', 'Hubo un error al agregar los datos. Verifique los datos.');
         }
     }
@@ -354,7 +355,8 @@ class RecordController extends Controller
             $filename = 'expediente' . '_' . $explode[0] . '_' . $expediente->numero_control . '.pdf';
             return $pdf->stream($filename);
         } catch (\Throwable $th) {
-            echo 'No se puede visualizar el archivo';
+            return response()->json("No se puede abrir el archivo".$th->getMessage());
+
         }
     }
     /**
@@ -378,7 +380,7 @@ class RecordController extends Controller
             // return $pdf->stream($filename);
             return $pdf->stream('hola.pdf');
         } catch (\Throwable $th) {
-            dd($th);
+            return response()->json("No se puede abrir el archivo".$th->getMessage());
         }
     }
     /**
