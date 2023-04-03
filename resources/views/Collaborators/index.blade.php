@@ -69,11 +69,11 @@
 
                                                             @include('Collaborators.modals.permisos')
                                                         </div>
-                                                        <div class="pe-1">
+                                                        {{-- <div class="pe-1">
                                                             @can('editar')
                                                             <button type="button" class="btn btn-icon btn-primary"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#editcollaborator-{{ $collaborator->id }}"
+                                                            data-bs-target="#editCollaborator-{{$collaborator->id}}"
                                                             title="Editar Colaborador">
 
                                                             <i class="bi bi-pencil"></i></button>
@@ -81,7 +81,7 @@
                                                         @include('Collaborators.modals.edit')
                                                             @endcan
 
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="pe-1">
                                                             @can('eliminar')
                                                             <form

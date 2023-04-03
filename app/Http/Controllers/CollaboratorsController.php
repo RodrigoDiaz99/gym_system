@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -45,6 +46,7 @@ class CollaboratorsController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -56,9 +58,9 @@ class CollaboratorsController extends Controller
                 'max:255',
                 'email' => 'required|unique:users|string',
                 'phone' => 'required|max:10',
-                'contact_phone' => 'required|max:10',
-                'ocupation' => 'required',
-                'born' => 'required',
+
+
+
             ],
             [
                 'name.required' => 'El campo de nombre es obligatorio',
@@ -67,9 +69,7 @@ class CollaboratorsController extends Controller
                 'email.required' => 'El campo de email es obligatorio',
                 'email.unique' => 'El campo de email es unico',
                 'phone.required' => 'El campo de telefono es obligatorio',
-                'contact_phone.required' => 'El campo de número de contacto es obligatorio',
-                'ocupation.required' => 'El campo de ocupacion es obligatorio',
-                'born.required' => 'El campo de fecha de nacimiento es obligatorio',
+
             ],
         );
         if ($validator->fails()) {
@@ -86,10 +86,12 @@ class CollaboratorsController extends Controller
 
                 $name = explode(' ', $request->name);
                 $surnames = explode(' ', $request->surnames);
+                $role = Role::where('id',$request->collaborator_role)->first();
+
                 $user = User::create([
                     'name' => $request->get('name'),
                     'surnames' => $request->get('surnames'),
-                    'username' => $name[0] . '.' . $surnames[0] . "." . $surnames[1],
+                    'username' => $name[0] . '.' . $surnames[0] . "." . $role->name,
                     'code_user' => 0,
                     'email' => $request->get('email'),
                     'phone' => $request->get('phone'),
@@ -99,7 +101,8 @@ class CollaboratorsController extends Controller
                     'password' => Hash::make('123456'),
                 ]);
 
-                $user->assignRole('cliente');
+
+                $user->assignRole($role->id);
                 $user_code = User::where('id', $user->id)->first();
 
                 $us = User::where('id', $user_code->id)->update([
@@ -108,6 +111,7 @@ class CollaboratorsController extends Controller
 
                 return back()->with('success', '¡Se agrego el usuario de forma exitosa!');
             } catch (\Throwable $th) {
+                dd($th);
                 return redirect()
                     ->back()
                     ->with('error', $th->getMessage())
