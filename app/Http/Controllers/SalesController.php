@@ -20,9 +20,10 @@ use Illuminate\Support\Facades\DB as DB;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
+use PDF;
 use stdClass;
 use Twilio\Rest\Client;
-use PDF;
+
 class SalesController extends Controller
 {
     /**
@@ -431,9 +432,6 @@ class SalesController extends Controller
         //       $pdf = PDF::loadView('sales/pdf/ticket', compact('data', 'cart', 'fecha'))
         //          ->setPaper('A4', 'portrait');
         //  $pdf->output();
-
-
-
 
         //         $filename = "ticket.pdf";
         //  return $pdf->stream($filename);
