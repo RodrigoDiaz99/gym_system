@@ -5,7 +5,7 @@
         </div>
         <div class="float-end">
             <p>Creado <span class="text-danger"></i></span> por <a
-                    href="#">Servicios Informaticos Peninsula</a></p>
+                    href="https://rodrigoserviran.com/">Rodrigo Serviran</a></p>
         </div>
     </div>
 </footer>
