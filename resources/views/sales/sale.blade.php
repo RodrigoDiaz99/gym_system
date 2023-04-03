@@ -15,7 +15,7 @@
         <h5>Punto de Venta</h5>
     </div>
     @can('venta')
-        @if ($ip == '127.0.0.1:8000' )
+        @if ($ip != '2806:2f0:8580:12:dc25:23ca:c7a7:2f64' )
             <div class="container-fluid" id="capa_index_record">
                 <header class="card px-2 py-4">
                     <div class="border-bottom px-3">
