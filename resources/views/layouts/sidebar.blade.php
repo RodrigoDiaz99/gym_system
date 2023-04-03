@@ -226,7 +226,7 @@
                     @endforeach
 
 
-                    @if ($ls->categoria == 'membresias')
+                    @if ($ls->categoria == 'bitacora')
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
                                 <i class="bi bi-filter-square-fill"></i>
@@ -234,37 +234,40 @@
                             </a>
 
                             <ul class="submenu" style="display: none;">
-                                @switch($ls->name)
-                                    @case('bitacoras_acceso')
-                                        <li class="submenu-item">
+                                @foreach ($permisos as $bitacora)
+                                @switch($bitacora->name)
+                                @case('bitacoras_acceso')
+                                    <li class="submenu-item">
 
-                                            <a href="{{ route('index.acceso') }}" class="sidebar-link"> <i
-                                                    class="bi bi-list-ul"></i>
-                                                <span>Bitacora de accesos</span></a>
+                                        <a href="{{ route('index.acceso') }}" class="sidebar-link"> <i
+                                                class="bi bi-list-ul"></i>
+                                            <span>Bitacora de accesos</span></a>
 
-                                        </li>
-                                    @break
+                                    </li>
+                                @break
 
-                                    @case('bitacoras_cancelacion')
-                                        <li class="submenu-item">
-                                            <a href="{{ route('bitacora.cancelacion') }}"><i class="bi bi-list-ul"></i>
-                                                <span>Bitacora de cancelacion</span></a>
-                                        </li>
-                                    @break
+                                @case('bitacoras_cancelacion')
+                                    <li class="submenu-item">
+                                        <a href="{{ route('bitacora.cancelacion') }}"><i class="bi bi-list-ul"></i>
+                                            <span>Bitacora de cancelacion</span></a>
+                                    </li>
+                                @break
 
-                                    @case('bitacoras_ventas')
-                                        <li class="submenu-item">
-                                            <a href="{{ route('bitacora.ventas') }}"><i class="bi bi-graph-up-arrow"></i>
-                                                <span>Bitacora Ventas</span></a>
-                                        </li>
-                                    @break
-                                @endswitch
+                                @case('bitacoras_ventas')
+                                    <li class="submenu-item">
+                                        <a href="{{ route('bitacora.ventas') }}"><i class="bi bi-graph-up-arrow"></i>
+                                            <span>Bitacora Ventas</span></a>
+                                    </li>
+                                @break
+                            @endswitch
+                                @endforeach
+
 
                             </ul>
                         </li>
                     @endif
                 @endforeach
-{{-- holA --}}
+
 
             </ul>
         </div>

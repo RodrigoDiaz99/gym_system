@@ -18,7 +18,7 @@ class CollaboratorsController extends Controller
     public function index()
     {
         $collaborators = User::whereHas("roles", function ($q) {
-            $q->where("name", '!=', "clientes");
+            $q->where("name", '!=', "cliente");
         })->paginate(15);
 
         $roles = Role::where('name', '!=', 'cliente')->get();

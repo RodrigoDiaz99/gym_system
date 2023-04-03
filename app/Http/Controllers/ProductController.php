@@ -114,12 +114,7 @@ class ProductController extends Controller
     {
 
         try {
-            $bar_code = Product::where("bar_code", $request->bar_code)->first();
-            if (!is_null($bar_code)) {
-                return redirect()
-                    ->back()
-                    ->with('error', "Ya existe un producto con el mismo codigo de barras");
-            }
+
             Product::find($id)->update([
                 'bar_code' => $request->bar_code,
                 'name' => $request->product_name,

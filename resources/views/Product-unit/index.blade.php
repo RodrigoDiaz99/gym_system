@@ -52,7 +52,7 @@
                                                         <div class="pe-1">
                                                             @can('editar')
                                                                 <button type="button" class="btn btn-icon btn-primary"
-                                                                    data-bs-toggle="modal" data-bs-target="#editProduct-unit"
+                                                                    data-bs-toggle="modal" data-bs-target="#editProduct-unit-{{$productUnit->id}}"
                                                                     title="Editar Unidad de medida">
 
                                                                     <i class="bi bi-pencil"></i></button>

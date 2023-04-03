@@ -93,9 +93,9 @@ class UserController extends Controller
                     'name' => $request->get('name'),
                     'surnames' => $request->get('surnames'),
                     'username' => $name[0] . '.' . $surnames[0] . $dia . $mes . $anio,
-                    'code_user' => 0,
+                    'code_user' =>0,
                     'email' => $request->get('email'),
-                    'phone' => '+52' . $request->get('phone'),
+                    'phone' => $request->get('phone'),
                     'contact_phone' => $request->contact_phone,
                     'ocupation' => $request->get('ocupation'),
                     'born' => $request->get('born'),
@@ -104,10 +104,8 @@ class UserController extends Controller
                 ]);
 
                 $user->assignRole('cliente');
-                $user_code = User::where('id', $user->id)->first();
-
-                $us = User::where('id', $user_code->id)->update([
-                    'code_user' => '000' . $user_code->id,
+                $user->update([
+                    'code_user' => '000' . $user->id,
                 ]);
 
                 return back()->with('success', '¡Se agrego el usuario de forma exitosa!');

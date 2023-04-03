@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductUnitRequest;
 use App\Models\ProductUnit;
 use Exception;
-
+use Illuminate\Http\Request;
 class ProductUnitController extends Controller
 {
     /**
@@ -36,7 +36,7 @@ class ProductUnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductUnitRequest $request)
+    public function store(Request $request)
     {
         try {
             ProductUnit::create([

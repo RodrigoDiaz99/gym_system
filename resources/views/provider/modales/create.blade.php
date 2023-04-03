@@ -15,7 +15,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                <input class="form-control" type="text" id="name" name="name">
+                                <input class="form-control" type="text" id="name" name="name" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                 <input class="form-control" type="number" name="number_phone" id="number_phone"
                                     maxlength="12"
                                     oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                    min="0">
+                                    min="0" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
-                                <input class="form-control" type="text" id="rfc" name="rfc" maxlength="13"
+                                <input class="form-control" type="text" id="rfc" name="rfc" maxlength="13" autocomplete="off"
                                     oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                             </div>
                         </div>

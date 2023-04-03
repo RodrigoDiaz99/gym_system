@@ -36,8 +36,7 @@
                             </div>
                         </div>
                         <div class="col-md">
-                            <label class="@error('bar_code') border-danger text-danger @enderror">Nombre
-                                Producto</label>
+                            <label class="@error('bar_code') border-danger text-danger @enderror">Codigo de Barras</label>
                             <div class="form-group mb-4">
                                 <div class="input-group input-group-alternative">
                                     <span

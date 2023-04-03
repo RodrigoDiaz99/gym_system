@@ -49,6 +49,7 @@
                                     </span>
                                     <select class="form-control @error('product_status') is-invalid @enderror"
                                         type="text" name="product_status">
+                                        <option value="{{$inventory->status}}" >{{ old('product_status',$inventory->status)  }}</option>
                                         <option value="Solicitado" {{ old($inventory->status) == 'Solicitado' ? 'selected' : '' }}>Solicitado</option>
                                         <option value="Comprado" {{ old($inventory->status) == 'Comprado' ? 'selected' : '' }}>Comprado</option>
                                         <option value="En camino" {{ old($inventory->status) == 'En camino' ? 'selected' : '' }}>En camino</option>
