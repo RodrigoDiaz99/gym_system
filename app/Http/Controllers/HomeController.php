@@ -31,7 +31,7 @@ class HomeController extends Controller
     {
         try {
             $ip = request()->ip();
-            var_dump($ip);
+
             $origenMembresias = false;
             $referenciaMembresia = '';
             $carbon = Carbon::now()->format('Y-m-d');
