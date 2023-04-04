@@ -34,7 +34,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-
+<th>Correo</th>
                                             <th>Role</th>
                                             <th>Permisos</th>
 
@@ -47,7 +47,9 @@
                                                 <td class="text-bold-500">
                                                     {{ $collaborator->name }}<br>
                                                 </td>
-
+<td class="text-bold-500">
+                                                    {{ $collaborator->email }}<br>
+                                                </td>
                                                 <td class="text-bold-500">{{ $collaborator->roles()->first()->name }}</td>
 
                                                 <td class="text-bold-500">
@@ -69,7 +71,7 @@
 
                                                             @include('Collaborators.modals.permisos')
                                                         </div>
-                                                        {{-- <div class="pe-1">
+                                                        <div class="pe-1">
                                                             @can('editar')
                                                             <button type="button" class="btn btn-icon btn-primary"
                                                             data-bs-toggle="modal"
@@ -81,7 +83,7 @@
                                                         @include('Collaborators.modals.edit')
                                                             @endcan
 
-                                                        </div> --}}
+                                                        </div>
                                                         <div class="pe-1">
                                                             @can('eliminar')
                                                             <form

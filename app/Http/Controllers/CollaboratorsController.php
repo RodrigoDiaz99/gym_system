@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -96,7 +97,7 @@ class CollaboratorsController extends Controller
                     'email' => $request->get('email'),
                     'phone' => $request->get('phone'),
 
-                    'cargo' => $request->get('cargo'),
+                    'ocupation' => $request->get('ocupation'),
 
                     'password' => Hash::make('123456'),
                 ]);
@@ -173,7 +174,31 @@ try {
      */
     public function update(Request $request, $id)
     {
-        //
+
+        try {
+
+            User::find($id)->update([
+                'name' => $request->get('name'),
+                'surnames' => $request->get('surnames'),
+
+                'code_user' => 0,
+                'email' => $request->get('email'),
+                'phone' => $request->get('phone'),
+
+                'ocupation' => $request->get('ocupation'),
+
+
+            ]);
+
+            return redirect()
+                ->back()
+                ->with('success', 'Actualización Éxitosa!');
+        } catch (Exception $e) {
+
+            return redirect()
+                ->back()
+                ->with('error', $e);
+        }
     }
 
     /**
