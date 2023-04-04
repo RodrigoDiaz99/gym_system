@@ -21,7 +21,8 @@ class CollaboratorsController extends Controller
     {
         $collaborators = User::whereHas("roles", function ($q) {
             $q->where("name", '!=', "cliente");
-        })->paginate(15);
+        })->withTrashed()
+        ->paginate(15);
 
         $roles = Role::where('name', '!=', 'cliente')->get();
         $permissions = Permission::get();
@@ -209,6 +210,16 @@ try {
      */
     public function destroy($id)
     {
-        //
+        try {
+            User::find($id)->delete();
+
+            return redirect()
+                ->back()
+                ->with('success', 'Se inactivo el usuario de manera éxitosa!');
+        } catch (Exception $e) {
+            return redirect()
+                ->back()
+                ->with('error', $e);
+        }
     }
 }

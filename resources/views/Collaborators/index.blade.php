@@ -7,17 +7,17 @@
         <header class="card px-2 py-4">
             <div class="d-flex justify-content-between align-items-center px-2">
                 <h3 class="h2">Lista Colaboradores</h3>
-@can('crear')
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCollaborator">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-        class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path
-            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-    </svg>
-    <span class="btn-inner--text">Agregar Colaborador</span>
-</button>
-@endcan
+                @can('crear')
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCollaborator">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        <span class="btn-inner--text">Agregar Colaborador</span>
+                    </button>
+                @endcan
 
             </div>
 
@@ -34,10 +34,10 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-<th>Correo</th>
+                                            <th>Correo</th>
                                             <th>Role</th>
                                             <th>Permisos</th>
-
+                                            <th>Estatus</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -47,7 +47,7 @@
                                                 <td class="text-bold-500">
                                                     {{ $collaborator->name }}<br>
                                                 </td>
-<td class="text-bold-500">
+                                                <td class="text-bold-500">
                                                     {{ $collaborator->email }}<br>
                                                 </td>
                                                 <td class="text-bold-500">{{ $collaborator->roles()->first()->name }}</td>
@@ -56,51 +56,60 @@
                                                     {{ implode(', ',$collaborator->permissions()->pluck('sub_name')->toArray()) }}
                                                 </td>
 
+                                                @if (is_null($collaborator->deleted_at))
+                                                    <td class="text-bold-500">
+                                                        Activo
+                                                    </td>
+                                                    <td class="text-bold-500" style="width: 150px;">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="pe-1">
+                                                                <button type="button" class="btn btn-icon btn-primary"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#permisosCollaborator-{{ $collaborator->id }}"
+                                                                    title="Agregar Permisos">
 
+                                                                    <i class="bi bi-key"></i></button>
 
+                                                                @include('Collaborators.modals.permisos')
+                                                            </div>
+                                                            <div class="pe-1">
+                                                                @can('editar')
+                                                                    <button type="button" class="btn btn-icon btn-primary"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#editCollaborator-{{ $collaborator->id }}"
+                                                                        title="Editar Colaborador">
 
-                                                <td class="text-bold-500" style="width: 150px;">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div class="pe-1">
-                                                            <button type="button" class="btn btn-icon btn-primary"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#permisosCollaborator-{{ $collaborator->id }}"
-                                                                title="Agregar Permisos">
+                                                                        <i class="bi bi-pencil"></i></button>
 
-                                                                <i class="bi bi-key"></i></button>
+                                                                    @include('Collaborators.modals.edit')
+                                                                @endcan
 
-                                                            @include('Collaborators.modals.permisos')
+                                                            </div>
+                                                            <div class="pe-1">
+                                                                @can('eliminar')
+                                                                    <form
+                                                                        action="{{ route('colaboradores.destroy', $collaborator->id) }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-icon btn-danger"
+                                                                            title="Eliminar Colaborador">
+                                                                            <i class="bi bi-trash"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                @endcan
+
+                                                            </div>
                                                         </div>
-                                                        <div class="pe-1">
-                                                            @can('editar')
-                                                            <button type="button" class="btn btn-icon btn-primary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#editCollaborator-{{$collaborator->id}}"
-                                                            title="Editar Colaborador">
+                                                    </td>
+                                                @else
+                                                    <td class="text-bold-500">
+                                                        Inactivo
+                                                    </td>
+                                                @endif
 
-                                                            <i class="bi bi-pencil"></i></button>
 
-                                                        @include('Collaborators.modals.edit')
-                                                            @endcan
 
-                                                        </div>
-                                                        <div class="pe-1">
-                                                            @can('eliminar')
-                                                            <form
-                                                            action="{{ route('colaboradores.destroy', $collaborator->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-icon btn-danger"
-                                                                title="Eliminar Colaborador">
-                                                                <i class="bi bi-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                            @endcan
-
-                                                        </div>
-                                                    </div>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

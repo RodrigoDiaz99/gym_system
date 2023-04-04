@@ -114,8 +114,9 @@ class SalesController extends Controller
                             $user = User::role('Admininistrador')->first();
                             if (!is_null($alert->maximun_alert)) {
                                 if ($alert->cantdad <= $alert->maximun_alert) {
+                                    $phone = "+52".$user->phone;
                                     $mensaje = 'La cantidad del producto ' . $alert->name . ' es de ' . $alert->quantity;
-                                    $this->sendMessage($mensaje, $user->phone);
+                                    $this->sendMessage($mensaje, $phone);
                                 }
                             }
                         }
@@ -180,6 +181,7 @@ class SalesController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th);
             return response()->json([
                 'lSuccess' => false,
                 'cMensaje' => $th->getMessage(),
@@ -267,13 +269,37 @@ class SalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private function sendMessage($message, $recipients)
+    // private function sendMessage($message, $recipients)
+    // {
+    //     $account_sid = getenv('TWILIO_SID');
+    //     $auth_token = getenv('TWILIO_AUTH_TOKEN');
+    //     $twilio_number = getenv('TWILIO_NUMBER');
+    //     $client = new Client($account_sid, $auth_token);
+    //     $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
+    // }
+
+    private function sendMessage($message, $number)
     {
-        $account_sid = getenv('TWILIO_SID');
-        $auth_token = getenv('TWILIO_AUTH_TOKEN');
-        $twilio_number = getenv('TWILIO_NUMBER');
-        $client = new Client($account_sid, $auth_token);
-        $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
+        try {
+            $client = new Client(env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN'));
+
+           $client->messages->create(
+                $number,
+                array(
+                    'from' => env('TWILIO_SMS_FROM'),
+                    'body' => $message
+                )
+            );
+
+            return array(
+                'success' => true,
+                'message' => 'SMS enviado correctamente.'
+            );
+
+        } catch (\Throwable $th) {
+           dd($th);
+        }
+
     }
     public function create()
     {

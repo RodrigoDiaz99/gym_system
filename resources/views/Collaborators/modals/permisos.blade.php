@@ -9,9 +9,6 @@
             <form action="{{ route('asginarPermisos') }}" method="POST" id="product_form">
                 <div class="modal-body">
                     @csrf
-
-
-
                         <ul style="text-align: left;" class="list-group">
                             @foreach ($permissions as $permission)
                                 <li class="list-group-item">
