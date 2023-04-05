@@ -37,7 +37,7 @@ class SalesController extends Controller
 
     public function cashPayment(Request $request)
     {
-        //   dd($request->all());
+
 
         try {
             $idCorte = 0;
@@ -75,53 +75,55 @@ class SalesController extends Controller
                 if (!is_null($corte)) {
                     $idCorte = $corte->id;
                 }
+                if ($request->tipoPago != 3) {
+                    if ($pro->lmembresia == 'true') {
+                        $membresia = Membership::join('membership_types', 'memberships.membership_types_id', '=', 'membership_types.id')
+                            ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
 
-                if ($pro->lmembresia == 'true') {
-                    $membresia = Membership::join('membership_types', 'memberships.membership_types_id', '=', 'membership_types.id')
-                        ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
+                            ->join('membership_pays', 'membership_membership_pays.membership_pays_id', '=', 'membership_pays.id')
+                            ->where('membership_pays.reference_line', $pro->lineReference)
+                            ->select('memberships.id as id', 'membership_pays.reference_line as lineReference', 'membership_types.days as days')
+                            ->first();
+                        if ($membresia->days == 1) {
+                            $expiration_date = Carbon::now();
+                        } else {
+                            $expiration_date = Carbon::now()->addDay($membresia->days);
+                        }
 
-                        ->join('membership_pays', 'membership_membership_pays.membership_pays_id', '=', 'membership_pays.id')
-                        ->where('membership_pays.reference_line', $pro->lineReference)
-                        ->select('memberships.id as id', 'membership_pays.reference_line as lineReference', 'membership_types.days as days')
-                        ->first();
-                    if ($membresia->days == 1) {
-                        $expiration_date = Carbon::now();
-                    } else {
-                        $expiration_date = Carbon::now()->addDay($membresia->days);
-                    }
-
-                    Membership::where('memberships.id', $membresia->id)->update([
-                        'carts_id' => $cart->id,
-                        'expiration_date' => $expiration_date,
-                        'estatus_membresia' => 1,
-                    ]);
-
-                    MembershipPay::where('reference_line', $membresia->lineReference)->update([
-                        'estatus' => 'P',
-                    ]);
-                } else {
-                    $requireInventory = Product::where('id', $pro->id_product)->first();
-
-                    if ($requireInventory->requireInventory) {
-                        $cantidad = Inventory::where('products_id', $pro->id_product)->first();
-                        $inventory = Inventory::where('products_id', $pro->id_product)->update([
-                            'quantity' => $cantidad->quantity - $pro->cantidad,
+                        Membership::where('memberships.id', $membresia->id)->update([
+                            'carts_id' => $cart->id,
+                            'expiration_date' => $expiration_date,
+                            'estatus_membresia' => 1,
                         ]);
-                        if ($inventory) {
-                            $alert = Inventory::where('products_id', $pro->id_product)
-                                ->join('products', 'inventories.products_id', '=', 'products.id')
-                                ->first();
-                            $user = User::role('Admininistrador')->first();
-                            if (!is_null($alert->maximun_alert)) {
-                                if ($alert->cantdad <= $alert->maximun_alert) {
-                                    $phone = "+52".$user->phone;
-                                    $mensaje = 'La cantidad del producto ' . $alert->name . ' es de ' . $alert->quantity;
-                                    $this->sendMessage($mensaje, $phone);
+
+                        MembershipPay::where('reference_line', $membresia->lineReference)->update([
+                            'estatus' => 'P',
+                        ]);
+                    } else {
+                        $requireInventory = Product::where('id', $pro->id_product)->first();
+
+                        if ($requireInventory->requireInventory) {
+                            $cantidad = Inventory::where('products_id', $pro->id_product)->first();
+                            $inventory = Inventory::where('products_id', $pro->id_product)->update([
+                                'quantity' => $cantidad->quantity - $pro->cantidad,
+                            ]);
+                            if ($inventory) {
+                                $alert = Inventory::where('products_id', $pro->id_product)
+                                    ->join('products', 'inventories.products_id', '=', 'products.id')
+                                    ->first();
+                                $user = User::role('Admininistrador')->first();
+                                if (!is_null($alert->maximun_alert)) {
+                                    if ($alert->cantdad <= $alert->maximun_alert) {
+                                        $phone = "+52" . $user->phone;
+                                        $mensaje = 'La cantidad del producto ' . $alert->name . ' es de ' . $alert->quantity;
+                                        $this->sendMessage($mensaje, $phone);
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
             }
 
             switch ($request->tipoPago) {
@@ -181,7 +183,7 @@ class SalesController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
+
             return response()->json([
                 'lSuccess' => false,
                 'cMensaje' => $th->getMessage(),
@@ -280,24 +282,25 @@ class SalesController extends Controller
 
     private function sendMessage($message, $number)
     {
+
         try {
             $client = new Client(env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN'));
 
-           $client->messages->create(
+            $client->messages->create(
                 $number,
                 array(
                     'from' => env('TWILIO_SMS_FROM'),
-                    'body' => $message
+                    'body' => $message,
                 )
             );
 
             return array(
                 'success' => true,
-                'message' => 'SMS enviado correctamente.'
+                'message' => 'SMS enviado correctamente.',
             );
 
         } catch (\Throwable $th) {
-           dd($th);
+            dd($th);
         }
 
     }
