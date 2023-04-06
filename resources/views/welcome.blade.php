@@ -1,132 +1,965 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-        <title>Laravel</title>
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="modinatheme">
+    <!-- ======== Page title ============ -->
+    <title>Techex - Information & Technology HTML Template</title>
+    <!-- ========== Favicon Icon ========== -->
+    <link rel="shortcut icon" href="assets_home/assets/img/favicon.png">
+    <!-- ===========  All Stylesheet ================= -->
+    <!--  Icon css plugins -->
+    <link rel="stylesheet" href="assets_home/assets/css/icons.css">
+    <!--  animate css plugins -->
+    <link rel="stylesheet" href="assets_home/assets/css/animate.css">
+    <!--  magnific-popup css plugins -->
+    <link rel="stylesheet" href="assets_home/assets/css/magnific-popup.css">
+    <!--  owl carosuel css plugins -->
+    <link rel="stylesheet" href="assets_home/assets/css/owl.carousel.min.css">
+    <!-- metis menu css file -->
+    <link rel="stylesheet" href="assets_home/assets/css/metismenu.css">
+    <!--  owl theme css plugins -->
+    <link rel="stylesheet" href="assets_home/assets/css/owl.theme.css">
+    <!--  Bootstrap css plugins -->
+    <link rel="stylesheet" href="assets_home/assets/css/bootstrap.min.css">
+    <!--  main style css file -->
+    <link rel="stylesheet" href="assets_home/assets/css/style.css">
+    <!-- template main style css file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<body class="body-wrapper">
 
-        <!-- Styles -->
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.dark\:text-gray-500{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}}
-        </style>
-
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
+    <div id="preloader" class="preloader">
+        <div class="animation-preloader">
+            <div class="spinner">
+            </div>
+                <div class="txt-loading">
+                    <span data-text-preloader="S" class="letters-loading">
+                        S
+                    </span>
+                    <span data-text-preloader="P" class="letters-loading">
+                        P
+                    </span>
+                    <span data-text-preloader="A" class="letters-loading">
+                        A
+                    </span>
+                    <span data-text-preloader="C" class="letters-loading">
+                        C
+                    </span>
+                    <span data-text-preloader="I" class="letters-loading">
+                        I
+                    </span>
+                    <span data-text-preloader="O" class="letters-loading">
+                        O
+                    </span>
+                    <span data-text-preloader="F" class="letters-loading">
+                        F
+                    </span>
+                    <span data-text-preloader="E" class="letters-loading">
+                        E
+                    </span>
+                    <span data-text-preloader="M" class="letters-loading">
+                        M
+                    </span>
+                    <span data-text-preloader="´S" class="letters-loading">
+                        ´S
+                    </span>
                 </div>
-            @endif
-
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
-                        <g clip-path="url(#clip0)" fill="#EF3B2D">
-                            <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z"/>
-                        </g>
-                    </svg>
+            <p class="text-center">Cargando</p>
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
                 </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a></div>
-                            </div>
+    <!-- welcome content start from here -->
 
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a></div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">Vibrant Ecosystem</div>
-                            </div>
-
-                            <div class="ml-12">
-                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                    Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                                </div>
-                            </div>
+    <header class="header-wrap header-2">
+        <div class="top-header d-none d-md-block">
+            <div class="container-flud">
+                <div class="row">
+                    <div class="col-md-7 pr-md-0 col-12">
+                        <div class="header-cta">
+                            <ul>
+                                <li>
+                                  <a href="mailto:support@gmail.com"><i class="fal fa-envelope"></i> support@gmail.com</a>
+                                </li>
+                                <li>
+                                  <a href="tel:+8801700080702"><i class="fal fa-phone"></i> +012 (345) 67 89</a>
+                                </li>
+                              </ul>
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-5 col-12">
+                        <div class="header-right-cta d-flex justify-content-end">
+                            <div class="social-profile mr-30">
+                                @if (Route::has('login'))
 
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+                                    @auth
+                                        <a href="{{ route('sales.point') }}" class="text-sm text-gray-700 dark:text-gray-500 underline"><i class="fas fa-home"></i> Panel</a>
+                                    @else
+                                    <a href="{{route('login')}}"><i class="fas fa-users"></i> Acceso</a>
 
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                                Shop
-                            </a>
 
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
+                                    @endauth
 
-                            <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor
-                            </a>
+                            @endif
+
+
+
+                            </div>
+
                         </div>
-                    </div>
-
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+
+        <div class="main-header-wraper">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-between">
+                    <div class="header-logo">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="assets_home/assets/img/logo-2.png" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-menu d-none d-xl-block">
+                        <div class="main-menu">
+                            <ul>
+                                <li><a href="#">Home <i class="fas fa-angle-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="index.html">home 1</a></li>
+                                        <li><a href="index-2.html">home 2</a></li>
+                                        <li><a href="index-3.html">home 3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about.html">About</a> </li>
+                                <li><a href="services.html">Services</a></li>
+                                <li><a href="cases-grid.html">Case Study</a></li>
+                                <li><a href="news.html">News</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header-right d-flex align-items-center">
+                        <div class="header-btn-cta">
+                            <a href="contact.html" class="theme-btn">Consultancy <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="mobile-nav-bar d-block ml-3 ml-sm-5 d-xl-none">
+                            <div class="mobile-nav-wrap">
+                                <div id="hamburger">
+                                    <i class="fal fa-bars"></i>
+                                </div>
+                                <!-- mobile menu - responsive menu  -->
+                                <div class="mobile-nav">
+                                    <button type="button" class="close-nav">
+                                        <i class="fal fa-times-circle"></i>
+                                    </button>
+                                    <nav class="sidebar-nav">
+                                        <ul class="metismenu" id="mobile-menu">
+                                            <li><a class="has-arrow" href="#">Homes</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="index.html">Homepage 1</a></li>
+                                                    <li><a href="index-2.html">Homepage 2</a></li>
+                                                    <li><a href="index-3.html">Homepage 3</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="about.html">about</a></li>
+                                            <li><a href="services.html">services</a></li>
+                                            <li>
+                                                <a class="has-arrow" href="#">Pages</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="faq.html">faq</a></li>
+                                                    <li><a href="services-details.html">services details</a></li>
+                                                    <li><a href="team.html">Team</a></li>
+                                                    <li><a href="cases-grid.html">Case Grid</a></li>
+                                                    <li><a href="case-2.html">Case Grid 2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="news.html">News</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </nav>
+
+                                    <div class="action-bar">
+                                        <a href="mailto:modinatheme@gmail.com"><i class="fal fa-envelope-open-text"></i>info@webmail.com</a>
+                                        <a href="tel:123-456-7890"><i class="fal fa-phone"></i>987-098-098-09</a>
+                                        <a href="contact.html" class="d-btn theme-btn black">Consultancy</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-slide-wrapper hero-2">
+        <div class="hero-text">Techex</div>
+        <div class="hero-slider-2 owl-carousel">
+            <div class="single-slide bg-cover" style="background-image: url('assets_home/assets/img/home2/slide1.jpg')">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-lg-10 col-xl-8">
+                            <div class="hero-contents">
+                                <h1>IT Solutions For <br> Grow Your Business.</h1>
+                                <p>We Have 25 Years Of Experience In IT Solutions</p>
+                                <a href="services.html" class="theme-btn">Service we provide <i class="fas fa-arrow-right"></i></a>
+                                <a href="about.html" class="theme-btn minimal-btn">learn more <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide bg-cover" style="background-image: url('assets_home/assets/img/home2/slide2.jpg')">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-lg-10 col-xl-8">
+                            <div class="hero-contents">
+                                <h1>Grow Your IT <br> Solutions Business.</h1>
+                                <p>We Have 15 Years Of Experience In IT Solutions</p>
+                                <a href="services.html" class="theme-btn">Service we provide <i class="fas fa-arrow-right"></i></a>
+                                <a href="about.html" class="theme-btn minimal-btn">learn more <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slide bg-cover" style="background-image: url('assets_home/assets/img/home2/slide1.jpg')">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-lg-10 col-xl-8">
+                            <div class="hero-contents">
+                                <h1>Technology<br> Grow your Business.</h1>
+                                <p>We Have 25 Years Of Experience In IT Solutions</p>
+                                <a href="services.html" class="theme-btn">Service we provide <i class="fas fa-arrow-right"></i></a>
+                                <a href="about.html" class="theme-btn minimal-btn">learn more <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-wrapper features-2 section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-xl-6">
+                    <div class="row mtm-30">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <i class="flaticon flaticon-monitor"></i>
+                                </div>
+                                <h4><a href="services-details.html">Development</a></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <i class="flaticon flaticon-pyramid"></i>
+                                </div>
+                                <h4><a href="services-details.html">Engineering</a></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <i class="flaticon flaticon-diagram"></i>
+                                </div>
+                                <h4><a href="services-details.html">IT Marketing</a></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <i class="flaticon flaticon-diagram-1"></i>
+                                </div>
+                                <h4><a href="services-details.html">UX Strategy</a></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <i class="flaticon flaticon-meeting"></i>
+                                </div>
+                                <h4><a href="services-details.html">Consultancy</a></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="icon-box">
+                                <div class="icon">
+                                    <i class="flaticon flaticon-stats"></i>
+                                </div>
+                                <h4><a href="services-details.html">Apps Design</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-5 offset-xl-1 mt-5 mt-xl-0">
+                    <div class="section-title">
+                        <p>How can help you</p>
+                        <h1>Business Solutions To Growth Business</h1>
+                    </div>
+                    <p class="mt-20">Sed ut perspiciatis unde omnis natus error voluptatems
+                        accusa ntium doloremque laudantium totam.</p>
+                    <a href="about.html" class="theme-btn mt-30">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <svg class="feature-bg"><path fill-rule="evenodd"  opacity="0.039" fill="rgb(8, 106, 215)"
+             d="M-0.000,232.999 C-0.000,232.999 239.131,-52.566 575.000,47.000 C910.869,146.565 1087.000,55.653 1231.000,19.999 C1375.000,-15.654 1800.820,-31.520 1915.000,232.999 C1445.000,232.999 -0.000,232.999 -0.000,232.999 Z"/>
+            </svg>
+    </section>
+
+    <section class="about-us-wrapper section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-12 pr-xl-5">
+                    <div class="section-title mb-30">
+                        <p>About Company</p>
+                        <h1>25 Years Of Experience <br> In IT Solutions</h1>
+                    </div>
+
+                    <p class="pr-md-5">Sed ut perspiciatis unde omnis natus error sit voluptatem accusa ntium doloremque laudantium totam rem aperiamea queipsa quae abillo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+
+                    <div class="about-check-list d-flex">
+                        <div class="banner bg-cover" style="background-image: url('assets_home/assets/img/about_list.jpg')"></div>
+
+                        <ul class="checked-list">
+                            <li>Product Engineering</li>
+                            <li>Digital Services</li>
+                            <li>IT Consultancy</li>
+                            <li>Automated Software</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-6 col-md-10 col-lg-6 pl-xl-5 col-12 mt-5 mt-xl-0">
+                    <div class="about-thum">
+                        <div class="item top-image text-right">
+                            <img src="assets_home/assets/img/about-big-thumb-1.jpg" alt="rrdevs">
+                        </div>
+                        <div class="item bottom-image">
+                            <img src="assets_home/assets/img/about-big-thumb-2.jpg" alt="rrdevs">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="funfact-wrapper bottom text-white">
+        <div class="container">
+            <div class="funfact-content-grid bg-cover" style="background-image: url('assets_home/assets/img/funfact-line.png')">
+                <div class="single-funfact-item">
+                    <div class="icon">
+                        <i class="fal fa-gem"></i>
+                    </div>
+                    <h3>368</h3>
+                    <p>Project Completed</p>
+                </div>
+                <div class="single-funfact-item">
+                    <div class="icon">
+                        <i class="fal fa-drafting-compass"></i>
+                    </div>
+                    <h3>785</h3>
+                    <p>Expert Consultants</p>
+                </div>
+                <div class="single-funfact-item">
+                    <div class="icon">
+                        <i class="fal fa-stars"></i>
+                    </div>
+                    <h3>896</h3>
+                    <p>5 Stars Rating</p>
+                </div>
+                <div class="single-funfact-item">
+                    <div class="icon">
+                        <i class="fal fa-trophy-alt"></i>
+                    </div>
+                    <h3>125</h3>
+                    <p>Awards Winning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-wrapper service-2 section-padding section-bg bg-contain" style="background-image: url('assets_home/assets/img/circle-bg.png')">
+        <div class="container">
+            <div class="row mb-50">
+                <div class="col-12 col-lg-12">
+                    <div class="section-title text-white text-center">
+                        <p>Popular IT services</p>
+                        <h1>Solutions For IT Business</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-xl-4 col-12">
+                    <div class="single-service-box">
+                        <div class="icon bg-cover" style="background-image: url('assets_home/assets/img/home2/s1.jpg')">
+                        </div>
+                        <div class="content-visible">
+                            <h4><a href="services-details.html">Manage IT Services</a></h4>
+                            <p>Sed perspicias unde omnis natus</p>
+                        </div>
+                        <div class="content-overlay">
+                            <h4><a href="services-details.html">Manage IT Services</a></h4>
+                            <p>Quis autem vel eum iure reprehenderit
+                            qui in ea voluptate velit esse</p>
+                            <a href="services-details.html" class="read-link">learn more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-12">
+                    <div class="single-service-box">
+                        <div class="icon bg-cover" style="background-image: url('assets_home/assets/img/home2/s2.jpg')">
+                        </div>
+                        <div class="content-visible">
+                            <h4><a href="services-details.html">Product  Engineering</a></h4>
+                            <p>Sed perspicias unde omnis natus</p>
+                        </div>
+                        <div class="content-overlay">
+                            <h4><a href="services-details.html">Product  Engineering</a></h4>
+                            <p>Quis autem vel eum iure reprehenderit
+                            qui in ea voluptate velit esse</p>
+                            <a href="services-details.html" class="read-link">learn more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4 col-12">
+                    <div class="single-service-box">
+                        <div class="icon bg-cover" style="background-image: url('assets_home/assets/img/home2/s3.jpg')">
+                        </div>
+                        <div class="content-visible">
+                            <h4><a href="services-details.html">Digital Marketing</a></h4>
+                            <p>Sed perspicias unde omnis natus</p>
+                        </div>
+                        <div class="content-overlay">
+                            <h4><a href="services-details.html">Product  Engineering</a></h4>
+                            <p>Quis autem vel eum iure reprehenderit
+                            qui in ea voluptate velit esse</p>
+                            <a href="services-details.html" class="read-link">learn more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section section-padding">
+        <div class="faq-bg bg-cover d-none d-lg-block" style="background-image: url('assets_home/assets/img/faq_home_2.jpg')"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 offset-lg-6 offset-xl-7">
+                    <div class="col-12 col-lg-12 mb-40">
+                        <div class="section-title">
+                            <p>Why choose us</p>
+                            <h1>Innovating Solutions <br> Digital Mindset</h1>
+                        </div>
+                    </div>
+
+                    <div class="faq-content">
+                        <div class="faq-accordion">
+                            <div id="accordion" class="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="faq1">
+                                        <p class="mb-0 text-capitalize">
+                                            <a class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" href="#faq-1">
+                                            Can I Get Internet In My Area?
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="faq-1" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus dolor at libero ultricies ullamcorper vel ut dui. Maecenas sollicitudin
+                                        </div>
+                                    </div>
+                                </div> <!-- /card -->
+                                <div class="card">
+                                    <div class="card-header" id="faq2">
+                                        <p class="mb-0 text-capitalize">
+                                            <a class="collapsed" role="button" data-toggle="collapse" aria-expanded="true" href="#faq-2">
+                                                How Helping Solve Climate Change ?
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div id="faq-2" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus dolor at libero ultricies ullamcorper vel ut dui. Maecenas sollicitudin
+                                        </div>
+                                    </div>
+                                </div> <!-- /card -->
+                                <div class="card">
+                                    <div class="card-header" id="faq4">
+                                        <p class="mb-0 text-capitalize">
+                                            <a class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" href="#faq-3">
+                                                How To Integrate Social Mobile Web ?
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div id="faq-3" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus dolor at libero ultricies ullamcorper vel ut dui. Maecenas sollicitudin
+                                        </div>
+                                    </div>
+                                </div> <!-- /card -->
+                                <div class="card">
+                                    <div class="card-header" id="faq4">
+                                        <p class="mb-0 text-capitalize">
+                                            <a class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" href="#faq-4">
+                                                Mobile Emails Increase Conversion ?
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div id="faq-4" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus dolor at libero ultricies ullamcorper vel ut dui. Maecenas sollicitudin
+                                        </div>
+                                    </div>
+                                </div> <!-- /card -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-team-wrapper section-padding">
+        <div class="container">
+            <div class="row align-items-center mb-40">
+                <div class="col-12 col-md-7 text-center text-md-left">
+                    <div class="section-title">
+                        <p>Exclusive Members</p>
+                        <h1>Meet Our Experience Team Members</h1>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 mt-4 mt-md-0 text-center text-md-right">
+                    <a href="team.html" class="theme-btn off-white">View all Member <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="team-members-list row">
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="single-team-member">
+                        <div class="member-img bg-cover bg-center" style="background-image: url('assets_home/assets/img/team/team1.jpg')">
+                        </div>
+                        <div class="member-bio">
+                            <h4>Wallace S. Camacho</h4>
+                            <p>Business Manager</p>
+                        </div>
+                        <div class="social-profile">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="single-team-member active">
+                        <div class="member-img bg-cover bg-center" style="background-image: url('assets_home/assets/img/team/team2.jpg')">
+                        </div>
+                        <div class="member-bio">
+                            <h4>Lawrence Pacheco</h4>
+                            <p>Web Developer</p>
+                        </div>
+                        <div class="social-profile">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="single-team-member">
+                        <div class="member-img bg-cover bg-center" style="background-image: url('assets_home/assets/img/team/team3.jpg')">
+                        </div>
+                        <div class="member-bio">
+                            <h4>Timothy L. Figueroa</h4>
+                            <p>Business Manager</p>
+                        </div>
+                        <div class="social-profile">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="single-team-member">
+                        <div class="member-img bg-cover bg-center" style="background-image: url('assets_home/assets/img/team/team4.jpg')">
+                        </div>
+                        <div class="member-bio">
+                            <h4>Michael L. Branch</h4>
+                            <p>Product Manager</p>
+                        </div>
+                        <div class="social-profile">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="case-study-carousel-wrapper">
+        <div class="container text-center">
+            <div class="case-study-items owl-carousel">
+                <div class="single-case-item">
+                    <div class="case-thumb bg-cover" style="background-image: url('assets_home/assets/img/home2/cs1.jpg')"></div>
+                    <div class="contents">
+                        <div class="content-visible">
+                            <h3>Business Knowladge</h3>
+                            <span>IT Consultation</span>
+                        </div>
+                        <div class="overlay-content">
+                            <h3><a href="project-details.html">Business Knowladge</a></h3>
+                            <p>Sed ut perspiciatis unde omnis natus erroraccusa ntium doloreque</p>
+                            <a href="project-details.html" class="theme-btn">read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-case-item">
+                    <div class="case-thumb bg-cover" style="background-image: url('assets_home/assets/img/home2/cs2.jpg')"></div>
+                    <div class="contents">
+                        <div class="content-visible">
+                            <h3>Market Leader Idea</h3>
+                            <span>IT Consultation</span>
+                        </div>
+                        <div class="overlay-content">
+                            <h3><a href="project-details.html">Market Leader Idea</a></h3>
+                            <p>Sed ut perspiciatis unde omnis natus erroraccusa ntium doloreque</p>
+                            <a href="project-details.html" class="theme-btn">read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-case-item">
+                    <div class="case-thumb bg-cover" style="background-image: url('assets_home/assets/img/home2/cs3.jpg')"></div>
+                    <div class="contents">
+                        <div class="content-visible">
+                            <h3>Relationship Buildup</h3>
+                            <span>IT Consultation</span>
+                        </div>
+                        <div class="overlay-content">
+                            <h3><a href="project-details.html">Relationship Buildup</a></h3>
+                            <p>Sed ut perspiciatis unde omnis natus erroraccusa ntium doloreque</p>
+                            <a href="project-details.html" class="theme-btn">read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-case-item">
+                    <div class="case-thumb bg-cover" style="background-image: url('assets_home/assets/img/home2/cs1.jpg')"></div>
+                    <div class="contents">
+                        <div class="content-visible">
+                            <h3>Business Knowladge</h3>
+                            <span>IT Consultation</span>
+                        </div>
+                        <div class="overlay-content">
+                            <h3><a href="project-details.html">Business Knowladge</a></h3>
+                            <p>Sed ut perspiciatis unde omnis natus erroraccusa ntium doloreque</p>
+                            <a href="project-details.html" class="theme-btn">read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-case-item">
+                    <div class="case-thumb bg-cover" style="background-image: url('assets_home/assets/img/home2/cs3.jpg')"></div>
+                    <div class="contents">
+                        <div class="content-visible">
+                            <h3>Relationship Buildup</h3>
+                            <span>IT Consultation</span>
+                        </div>
+                        <div class="overlay-content">
+                            <h3><a href="project-details.html">Relationship Buildup</a></h3>
+                            <p>Sed ut perspiciatis unde omnis natus erroraccusa ntium doloreque</p>
+                            <a href="project-details.html" class="theme-btn">read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="consultations-wrapper section-padding bg-contain pb-0" style="background-image: url('assets_home/assets/img/circle-bg-2.png')">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <h1>Don’t Hesited To <br> Contact With Us, We’re  Very Friendly </h1>
+                    <p class="mt-3">Sed ut perspiciatis unde omnis natus error sit voluptatem
+                        accusa ntium doloremque laudantium totam rem aperiamea
+                        queipsa quae abillo inventore veritatise.</p>
+
+                    <div class="call-consultation mt-30 mb-40">
+                        <div class="icon">
+                            <i class="fal fa-phone-plus"></i>
+                        </div>
+                        <div class="content">
+                            <span>Phone Number</span>
+                            <h5><a href="tel:+012 (345) 789 66">+012 (345) 789 66</a></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 col-xl-6 offset-xl-1">
+                    <div class="consultations-form text-white">
+                        <p>let’s talk with us</p>
+                        <h1>Free Consultations</h1>
+                        <form action="#">
+                            <input type="text" placeholder="Full Name Here">
+                            <input type="email" placeholder="Email Address">
+                            <textarea placeholder="Write Message"></textarea>
+                            <button class="theme-btn" type="submit">Get Free Quote <i class="fas fa-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-wrapper pt-50 pb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <div class="testimonial-carousel-2 owl-carousel owl-theme">
+                        <div class="single-testimonial active">
+                            <div class="icon">
+                                <i class="flaticon-right-quote"></i>
+                            </div>
+                            <h2>On the other hand denounc with
+                                ghteo indignation and dislike men
+                                who so beguiled and demoralized
+                                the charms of pleasure the momen
+                                blinded by desire cannot foresee
+                                the pain and trouble.</h2>
+                            <div class="client-info">
+                                <div class="client-img bg-cover" style="background-image: url('assets_home/assets/img/home1/testi1.jpg')"></div>
+                                <div class="client-bio">
+                                    <h3>Salman Ahmed</h3>
+                                    <p>Web Developer</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-testimonial">
+                            <div class="icon">
+                                <i class="flaticon-right-quote"></i>
+                            </div>
+                            <h2>On the other hand denounc with
+                                ghteo indignation and dislike men
+                                who so beguiled and demoralized
+                                the charms of pleasure the momen
+                                blinded by desire cannot foresee
+                                the pain and trouble.</h2>
+                            <div class="client-info">
+                                <div class="client-img bg-cover" style="background-image: url('assets_home/assets/img/home1/testi1.jpg')"></div>
+                                <div class="client-bio">
+                                    <h3>Rahul M. McLean</h3>
+                                    <p>WordPress Expert</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-testimonial">
+                            <div class="icon">
+                                <i class="flaticon-right-quote"></i>
+                            </div>
+                            <h2>On the other hand denounc with
+                                ghteo indignation and dislike men
+                                who so beguiled and demoralized
+                                the charms of pleasure the momen
+                                blinded by desire cannot foresee
+                                the pain and trouble.</h2>
+                            <div class="client-info">
+                                <div class="client-img bg-cover" style="background-image: url('assets_home/assets/img/home1/testi1.jpg')"></div>
+                                <div class="client-bio">
+                                    <h3>Salman Ahmed</h3>
+                                    <p>Frontend Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="client-brand-logo-wrap">
+        <div class="container">
+            <div class="brand-carousel-active pt-60 pb-60 d-flex justify-content-between owl-carousel">
+                <div class="single-client">
+                    <img src="assets_home/assets/img/brand/1.png" alt="">
+                </div>
+                <div class="single-client">
+                    <img src="assets_home/assets/img/brand/2.png" alt="">
+                </div>
+                <div class="single-client">
+                    <img src="assets_home/assets/img/brand/3.png" alt="">
+                </div>
+                <div class="single-client">
+                    <img src="assets_home/assets/img/brand/4.png" alt="">
+                </div>
+                <div class="single-client">
+                    <img src="assets_home/assets/img/brand/b4.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-banner">
+        <div class="container-fluid bg-cover section-bg" style="background-image: url('assets_home/assets/img/cta_bg1.png')">
+            <div class="cta-content">
+                <div class="row align-items-center">
+                    <div class="col-xl-7 text-white col-12 text-center text-xl-left">
+                        <h1>Ready To Get Free Consulations For <br> Any Kind Of It Solutions ? </h1>
+                    </div>
+                    <div class="col-xl-5 col-12 text-center text-xl-right">
+                        <a href="contact.html" class="theme-btn mt-4 mt-xl-0">Get a quote <i class="fas fa-arrow-right"></i></a>
+                        <a href="services-details.html" class="ml-sm-3 mt-4 mt-xl-0 theme-btn minimal-btn">read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-2 footer-wrap">
+        <div class="footer-widgets">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-md-6 col-xl-3 col-12 pr-xl-4">
+                        <div class="single-footer-wid site_footer_widget">
+                            <a href="index.html">
+                                <img src="assets_home/assets/img/logo.png" alt="">
+                            </a>
+                            <p class="mt-4">Sed ut perspiciatis unde omnis natus voluptatem accusa ntiumy doloremque laudantium.omnis natus voluptatem accusa ntiumy doloremque laudantium</p>
+                            <div class="social-link mt-30">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div> <!-- /.col-lg-3 - single-footer-wid -->
+                    <div class="col-md-6 col-xl-2 col-12">
+                        <div class="single-footer-wid">
+                            <div class="wid-title">
+                                <h4>Company</h4>
+                            </div>
+                            <ul>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="about.html">Company History</a></li>
+                                <li><a href="contact.html">Need a Career</a></li>
+                                <li><a href="project-details.html">Working Process</a></li>
+                                <li><a href="news.html">Blog Post</a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /.col-lg-3 - single-footer-wid -->
+                    <div class="col-md-6 col-xl-2 col-12">
+                        <div class="single-footer-wid">
+                            <div class="wid-title">
+                                <h4>Company</h4>
+                            </div>
+                            <ul>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="about.html">Company History</a></li>
+                                <li><a href="contact.html">Need a Career</a></li>
+                                <li><a href="project-details.html">Working Process</a></li>
+                                <li><a href="news.html">Blog Post</a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- /.col-lg-3 - single-footer-wid -->
+                    <div class="col-md-6 col-xl-3 col-12">
+                        <div class="single-footer-wid recent_post_widget">
+                            <div class="wid-title">
+                                <h4>News News</h4>
+                            </div>
+                            <div class="recent-post-list">
+                                <div class="single-recent-post">
+                                    <div class="thumb bg-cover" style="background-image: url('assets_home/assets/img/blog/b1.jpg');"></div>
+                                    <div class="post-data">
+                                        <span><i class="fal fa-calendar-alt"></i>24th Nov 2020</span>
+                                        <h5><a href="news-details.html">User’s Perspes Using Story Structure</a></h5>
+                                    </div>
+                                </div>
+                                <div class="single-recent-post">
+                                    <div class="thumb bg-cover" style="background-image: url('assets_home/assets/img/blog/b2.jpg');"></div>
+                                    <div class="post-data">
+                                        <span><i class="fal fa-calendar-alt"></i>15th July 2021</span>
+                                        <h5><a href="news-details.html">Optimiz For Assistive Technology Users</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /.col-lg-3 - single-footer-wid -->
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <div class="footer-bottom-content">
+                    © 2021 Techex All Rights Reserved, Share By <a href="https://nullphpscript.com/category/html/">HTML Templates</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--  ALl JS Plugins
+    ====================================== -->
+    <script src="assets_home/assets/js/jquery.min.js"></script>
+    <script src="assets_home/assets/js/modernizr.min.js"></script>
+    <script src="assets_home/assets/js/jquery.easing.js"></script>
+    <script src="assets_home/assets/js/popper.min.js"></script>
+    <script src="assets_home/assets/js/bootstrap.min.js"></script>
+    <script src="assets_home/assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets_home/assets/js/imageload.min.js"></script>
+    <script src="assets_home/assets/js/scrollUp.min.js"></script>
+    <script src="assets_home/assets/js/owl.carousel.min.js"></script>
+    <script src="assets_home/assets/js/magnific-popup.min.js"></script>
+    <script src="assets_home/assets/js/waypoint.js"></script>
+    <script src="assets_home/assets/js/easypiechart.min.js"></script>
+    <script src="assets_home/assets/js/counterup.min.js"></script>
+    <script src="assets_home/assets/js/wow.min.js"></script>
+    <script src="assets_home/assets/js/metismenu.js"></script>
+    <script src="assets_home/assets/js/timeline.min.js"></script>
+    <script src="assets_home/assets/js/ajax-mail.js"></script>
+    <script src="assets_home/assets/js/active.js"></script>
+</body>
+
 </html>
