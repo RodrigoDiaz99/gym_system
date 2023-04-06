@@ -40,12 +40,19 @@ class MembershipController extends Controller
 
     public function validacionMembresia(Request $request)
     {
-        try {
-            $validacion = Membership::join('users', 'memberships.users_id', '=', 'users.id')
-                ->where('users.code_user', $request->code_user)
-                ->where('memberships.estatus_membresia', 1)
 
+        try {
+            //Usuario1.Apellido31031999
+            $validacion = DB::table('membership_membership_pays')
+               ->join('membership_pays', 'membership_membership_pays.membership_pays_id', '=', 'membership_pays.id')
+                ->join('memberships', 'membership_membership_pays.memberships_id', '=', 'memberships.id')
+                ->join('users', 'memberships.users_id', '=', 'users.id')
+
+                ->where('users.username', $request->code_user)
+                 ->where('memberships.estatus_membresia', 1)
+                 ->where('membership_pays.estatus', "P")
                 ->first();
+
             if (is_null($validacion)) {
                 throw new Exception("Usted no cuenta con una membresia o ya esta caducada, compre una nueva");
             }
