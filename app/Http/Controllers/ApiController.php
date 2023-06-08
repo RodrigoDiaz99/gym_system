@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
@@ -57,5 +58,18 @@ class ApiController extends Controller
             'data' => $lista,
         ]);
         return $array;
+    }
+    public function postPedido(Request $request){
+
+            // Validar y procesar los datos recibidos en la solicitud
+           // Validar y procesar el JSON recibido
+    $json = $request->getContent();
+    $data = json_decode($json, true);
+
+    // Realizar las acciones necesarias con los datos del pedido
+
+    // Retornar una respuesta apropiada
+    return response()->json(['message' => 'JSON received and processed successfully']);
+
     }
 }
