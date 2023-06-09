@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedidos;
 use App\Models\Product;
+use App\Models\Product_Pedido;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -12,17 +16,17 @@ class ApiController extends Controller
     {
 
         $product = Product::join('category_products', 'products.category_products_id', '=', 'category_products.id')
-        ->join('inventories','inventories.products_id','=','inventories.id')
-        ->where('products.requireInventory', 0)
+            ->join('inventories', 'inventories.products_id', '=', 'inventories.id')
+            ->where('products.requireInventory', 0)
             ->select('products.id', 'products.bar_code',
-                'products.name','inventories.sales_price')
+                'products.name', 'inventories.sales_price')
             ->get();
         foreach ($product as $lstProduct) {
             $lista[] = array(
                 'iIDProducto' => $lstProduct->id,
                 'cNombreProduct' => $lstProduct->name,
                 'cCodeBar' => $lstProduct->bar_code,
-                'price'=>$lstProduct->sales_price
+                'price' => $lstProduct->sales_price,
 
             );
         }
@@ -37,18 +41,18 @@ class ApiController extends Controller
     {
 
         $product = Product::join('category_products', 'products.category_products_id', '=', 'category_products.id')
-        ->join('inventories','inventories.products_id','=','inventories.id')
-        ->where('products.requireInventory', 0)
+            ->join('inventories', 'inventories.products_id', '=', 'inventories.id')
+            ->where('products.requireInventory', 0)
             ->select('products.id', 'products.bar_code',
-                'products.name','inventories.sales_price')
+                'products.name', 'inventories.sales_price')
             ->get();
-            dd($product);
+
         foreach ($product as $lstProduct) {
             $lista[] = array(
                 'iIDProducto' => $lstProduct->id,
                 'cNombreProduct' => $lstProduct->name,
                 'cCodeBar' => $lstProduct->bar_code,
-                'precio'
+                'precio',
 
             );
         }
@@ -59,17 +63,46 @@ class ApiController extends Controller
         ]);
         return $array;
     }
-    public function postPedido(Request $request){
+    public function postPedido(Request $request)
+    {
 
-            // Validar y procesar los datos recibidos en la solicitud
-           // Validar y procesar el JSON recibido
-    $json = $request->getContent();
-    $data = json_decode($json, true);
+        // Validar y procesar los datos recibidos en la solicitud
+        // Validar y procesar el JSON recibido
 
-    // Realizar las acciones necesarias con los datos del pedido
+        // Decodificar el JSON
+        $requestData = $request->getContent();
 
-    // Retornar una respuesta apropiada
-    return response()->json(['message' => 'JSON received and processed successfully']);
+        // Extraer el JSON de la cadena
+
+        // Decodificar el JSON
+        $data = json_decode($requestData);
+
+
+        $user = User::where('code_user', $data->code_user)->first();
+
+        $reference = mt_rand(00000000001, 9999999990);
+        $pedido = Pedidos::create([
+            'orden_number' => 0,
+            'reference_line' => 0,
+            'estatus' => "P",
+            'user_id' => $user->id,
+        ]);
+        $pedido->update([
+            'orden_number' => '000' . $pedido->id,
+            'reference_line' =>  $pedido->id . $reference . "FOOD",
+        ]);
+        foreach ($data->listPedido as $list) {
+$Order =Product_Pedido::create([
+'products_id'=>
+]);
+
+        }
+        return $data->listPedido;
+
+        // Realizar las acciones necesarias con los datos del pedido
+
+        // Retornar una respuesta apropiada
+        return response()->json(['message' => 'JSON received and processed successfully']);
 
     }
 }

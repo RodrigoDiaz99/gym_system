@@ -10,4 +10,10 @@ class Product_Pedido extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = "product_pedidos";
+
+    protected $fillable = [
+        'products_id',
+        'pedidos_id',
+    ];
 }
