@@ -18,7 +18,9 @@ class CreatePedidosTable extends Migration
             $table->string('orden_number');
             $table->string('reference_line');
             $table->string('estatus');
+            $table->float('price');
             $table->foreignId('users_id')->constrained();
+
             $table->timestamps();
             $table->softDeletes();
         });

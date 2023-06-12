@@ -22,7 +22,7 @@ Route::controller('ApiController')
 ->group(function () {
     Route::get('/getProductos', 'getProductos');
     Route::get('/getProductosF', 'getPro ductosFull');
-   Route::post('/postPedidos', 'postPedido');
+
 
 });
 

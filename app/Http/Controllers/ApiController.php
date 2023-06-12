@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedidos;
 use App\Models\Product;
-use App\Models\Product_Pedido;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -77,7 +75,6 @@ class ApiController extends Controller
         // Decodificar el JSON
         $data = json_decode($requestData);
 
-
         $user = User::where('code_user', $data->code_user)->first();
 
         $reference = mt_rand(00000000001, 9999999990);
@@ -89,12 +86,9 @@ class ApiController extends Controller
         ]);
         $pedido->update([
             'orden_number' => '000' . $pedido->id,
-            'reference_line' =>  $pedido->id . $reference . "FOOD",
+            'reference_line' => $pedido->id . $reference . "FOOD",
         ]);
         foreach ($data->listPedido as $list) {
-$Order =Product_Pedido::create([
-'products_id'=>
-]);
 
         }
         return $data->listPedido;
