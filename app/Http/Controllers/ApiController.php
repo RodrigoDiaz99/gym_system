@@ -88,9 +88,7 @@ class ApiController extends Controller
             'orden_number' => '000' . $pedido->id,
             'reference_line' => $pedido->id . $reference . "FOOD",
         ]);
-        foreach ($data->listPedido as $list) {
 
-        }
         return $data->listPedido;
 
         // Realizar las acciones necesarias con los datos del pedido
