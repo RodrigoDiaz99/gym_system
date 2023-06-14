@@ -19,6 +19,7 @@ class CreatePedidosTable extends Migration
             $table->string('reference_line');
             $table->string('estatus');
             $table->foreignId('users_id')->constrained();
+            $table->float('price');
             $table->timestamps();
             $table->softDeletes();
         });
