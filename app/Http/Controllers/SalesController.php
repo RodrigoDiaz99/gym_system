@@ -194,7 +194,7 @@ class SalesController extends Controller
 
     public function search(Request $request)
     {
-        dd($request->all());
+
         try {
             $gridProductos = [];
 
