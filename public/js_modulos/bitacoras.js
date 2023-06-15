@@ -28,7 +28,7 @@ $(function ($) {
             title: "Sistema",
             visible: true,
         }, {
-            field: "cSistema",
+            field: "carts_id",
             title: "No Venta",
             visible: true,
         },

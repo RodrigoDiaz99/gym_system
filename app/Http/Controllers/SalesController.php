@@ -39,6 +39,7 @@ class SalesController extends Controller
     {
 
 
+
         try {
             $idCorte = 0;
             $usuario = Auth::id();
@@ -193,6 +194,7 @@ class SalesController extends Controller
 
     public function search(Request $request)
     {
+        dd($request->all());
         try {
             $gridProductos = [];
 
@@ -226,11 +228,7 @@ class SalesController extends Controller
 
                 return $gridProductos;
             } else {
-                // $membresiaRef =  MembershipPay::where('reference_line',$request->producto)
-                // ->first();
 
-                // $lstpay = MemberShipMembershipPay::where('membership_pays_id',$membresiaRef->id)
-                // ->get();
 
                 $membresia = Membership::select('memberships.id as id', 'membership_types.name as name', 'membership_types.price as price', 'membership_pays.reference_line as lineReference')
                     ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
@@ -240,8 +238,7 @@ class SalesController extends Controller
                     ->whereNotIn('membership_pays.estatus', ['P'])
                     ->get();
 
-                //dd($membresia);
-
+            if(sizeof($membresia)>0){
                 foreach ($membresia as $memb) {
                     $list = new stdClass();
 
@@ -254,6 +251,11 @@ class SalesController extends Controller
                     $list->lineReference = $memb->lineReference;
                     $gridProductos[] = $list;
                 }
+
+            }else{
+
+            }
+
 
                 // dd($gridProductos);
 
