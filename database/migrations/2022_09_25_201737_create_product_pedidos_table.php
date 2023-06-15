@@ -15,6 +15,7 @@ class CreateProductPedidosTable extends Migration
     {
         Schema::create('product_pedidos', function (Blueprint $table) {
             $table->id();
+            $table->integer('cantidad');
             $table->foreignId('products_id')->constrained();
             $table->foreignId('pedidos_id')->constrained();
 $table->float('cantidad');

@@ -17,7 +17,11 @@ class CreateBitacoraCancelacionsTable extends Migration
             $table->id();
             $table->string("motivo");
             $table->string("userCreator");
+<<<<<<< HEAD
             $table->foreignId('carts_id');
+=======
+            $table->integer('carts_id');
+>>>>>>> 6b8765f2ffc0feead847dd743999658cccd28c92
             $table->string("cSistema");
             $table->timestamps();
             $table->softDeletes();
