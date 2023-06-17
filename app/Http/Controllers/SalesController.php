@@ -9,6 +9,7 @@ use App\Models\Configurations;
 use App\Models\CorteCaja;
 use App\Models\Inventory;
 use App\Models\Membership;
+use App\Models\Pedidos;
 use App\Models\MembershipPay;
 use App\Models\Product;
 use App\Models\User;
@@ -58,6 +59,8 @@ class SalesController extends Controller
 
             $productos = $request->productos;
 
+            // dd($productos);
+
             foreach ($request->productos as $lst) {
                 $jsonEncode = json_encode($lst);
                 $pro = json_decode($jsonEncode);
@@ -67,6 +70,7 @@ class SalesController extends Controller
                     'products_id' => $pro->id_product,
                     'quantity' => $pro->cantidad,
                     'lMembresia' => $pro->lmembresia == 1 ? true : false,
+                    'lPedido' => $pro->lPedido == 1 ? true : false,
                 ]);
 
                 $corte = CorteCaja::where('lActivo', true)
@@ -78,6 +82,25 @@ class SalesController extends Controller
                 }
                 if ($request->tipoPago != 3) {
                     if ($pro->lmembresia == 'true') {
+
+                        if($pro->lPedido == 'true'){
+
+                            $pedido = Pedidos::where('reference_line', $pro->lineReference)
+                            ->first();
+
+                            // dd($pedido);
+
+                            Pedidos::where('pedidos.id', $pedido->id)->update([
+                                'estatus' => 'PAGADO',                                
+                            ]);
+
+
+
+                        }else{
+
+
+
+
                         $membresia = Membership::join('membership_types', 'memberships.membership_types_id', '=', 'membership_types.id')
                             ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
 
@@ -100,6 +123,8 @@ class SalesController extends Controller
                         MembershipPay::where('reference_line', $membresia->lineReference)->update([
                             'estatus' => 'P',
                         ]);
+
+                    }
                     } else {
                         $requireInventory = Product::where('id', $pro->id_product)->first();
 
@@ -221,6 +246,7 @@ class SalesController extends Controller
                     $list->sales_price = $pro->sales_price;
                     $list->quantity = $pro->quantity;
                     $list->lmembresia = false;
+                    $list->lPedido = false;
                     $list->lineReference = 'noaplica';
 
                     $gridProductos[] = $list;
@@ -248,13 +274,43 @@ class SalesController extends Controller
                     $list->sales_price = $memb->price;
                     $list->quantity = 'no aplica';
                     $list->lmembresia = true;
+                    $list->lPedido = false;
                     $list->lineReference = $memb->lineReference;
                     $gridProductos[] = $list;
                 }
 
-            }else{
+            }else{         
+                
+                // dd($request->producto);
+
+               
+
+                $pedido = Pedidos::select('pedidos.id as id', 'pedidos.orden_number as name', 'pedidos.price as price', 'pedidos.reference_line as lineReference')
+                ->where('pedidos.reference_line', $request->producto)
+                ->whereNotIn('pedidos.estatus', ['CANCELADO', 'PAGADO'])
+                ->get();
+
+                // dd($pedido);
+
+                
+            if(sizeof($pedido)>0){
+                foreach ($pedido as $pedi) {
+                    $list = new stdClass();
+
+                    $list->name = "Pedido: ".$pedi->name;
+                    $list->id_product = $pedi->id;
+                    $list->cantidad = 1;
+                    $list->sales_price = $pedi->price;
+                    $list->quantity = 'no aplica';
+                    $list->lmembresia = true;
+                    $list->lPedido = true;
+                    $list->lineReference = $pedi->lineReference;
+                    $gridProductos[] = $list;
+                }
+            }
 
             }
+
 
 
                 // dd($gridProductos);

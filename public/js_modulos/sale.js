@@ -272,6 +272,7 @@ function selectProducto() {
                                         : product.quantity - 1,
                                 lineReference: product.lineReference,
                                 lmembresia: product.lmembresia,
+                                lPedido: product.lPedido,
 
                                 sales_price: product.sales_price,
                             },
@@ -315,6 +316,7 @@ function selectProducto() {
                                                 r[0].sales_price,
                                             quantity: cantidad - 1,
                                             lmembresia: lst.lmembresia,
+                                            lPedido: lst.lPedido,
                                         },
                                     });
                                 }
@@ -335,12 +337,69 @@ function selectProducto() {
                                     quantity: r[0].quantity,
                                     lineReference: r[0].lineReference,
                                     lmembresia: r[0].lmembresia,
+                                    lPedido: r[0].lPedido,
 
                                     sales_price: r[0].sales_price,
                                 },
                             });
                         }
                     } else {
+
+                        if(r[0].lPedido == true){
+
+                            var num =
+                            $("#gridSale").bootstrapTable("getData").length;
+                        let incluido = false;
+                        r.forEach(function (product) {
+                            table.forEach(function (lst) {
+                                if (
+                                    product.lineReference == lst.lineReference
+                                ) {
+                                    // console.log(product.lineReference,lst.lineReference);
+                                    // console.log(product.lineReference == lst.lineReference);
+                                    incluido = true;
+                                    swal.fire({
+                                        icon: "info",
+                                        title: "Pedido ya en la lista",
+                                        text: "",
+
+                                        showConfirmButton: true,
+                                        confirmButtonClass:
+                                            "btn btn-primary btn-round",
+                                        confirmButtonText: "Aceptar",
+                                        buttonsStyling: false,
+                                    });
+                                } else {
+                                    if (!incluido) {
+                                        $("#gridSale").bootstrapTable(
+                                            "insertRow",
+                                            {
+                                                index: num + 1,
+                                                row: {
+                                                    id: num + 1,
+                                                    name: product.name,
+                                                    id_product:
+                                                        product.id_product,
+                                                    cantidad: product.cantidad,
+                                                    quantity: product.quantity,
+                                                    lineReference:
+                                                        product.lineReference,
+                                                    lmembresia:
+                                                        product.lmembresia,
+                                                    lPedido:
+                                                        product.lPedido,
+
+                                                    sales_price:
+                                                        product.sales_price,
+                                                },
+                                            }
+                                        );
+                                    }
+                                }
+                            });
+                        });
+
+                        }else{
                         var num =
                             $("#gridSale").bootstrapTable("getData").length;
                         let incluido = false;
@@ -380,6 +439,8 @@ function selectProducto() {
                                                         product.lineReference,
                                                     lmembresia:
                                                         product.lmembresia,
+                                                    lPedido:
+                                                        product.lPedido,
 
                                                     sales_price:
                                                         product.sales_price,
@@ -390,6 +451,7 @@ function selectProducto() {
                                 }
                             });
                         });
+                    }
                     }
                 }
 

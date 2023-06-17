@@ -16,6 +16,8 @@ class Carts_has_products extends Model
         'products_id',
         'quantity',
         'lMembresia',
+        'lPedido',
+
 
 
     ];
