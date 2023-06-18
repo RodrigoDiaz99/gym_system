@@ -26,8 +26,9 @@ Auth::routes(['register' => false, 'login' => true, 'password/confirm' => false,
 /*
  * Home Routes
  */
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::group(['middleware' => ['auth', 'verified']], function () {
+
     Route::get('perfil/actualizar', ['as' => 'perfil.edit', 'uses' => 'UserController@edit_user']);
     Route::patch('perfil/actualizar', ['as' => 'perfil.update', 'uses' => 'UserController@update_user']);
 
@@ -39,7 +40,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/punto/venta/2', [App\Http\Controllers\HomeController::class, 'index2'])->name('sales.point2');
     });
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+
 
     Route::controller('ProviderController')
         ->prefix('Proveedores')

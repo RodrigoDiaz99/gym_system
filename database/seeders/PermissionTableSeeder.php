@@ -44,6 +44,10 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['name' => 'editar', 'categoria' => 'generales', 'numero_categoria' => 11, 'sub_name' => 'Editar Registros']);
         Permission::create(['name' => 'restaurar', 'categoria' => 'generales', 'numero_categoria' => 11, 'sub_name' => 'Restaurar Registros']);
 
+        Permission::create(['name' => 'ordenes', 'categoria' => 'aplicacion', 'numero_categoria' => 12, 'sub_name' => 'pedidos']);
+
+
+
 
     }
 }
