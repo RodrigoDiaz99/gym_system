@@ -19,6 +19,7 @@ class CreateCartsHasProductsTable extends Migration
             $table->integer('products_id');
             $table->integer('quantity');
             $table->boolean('lMembresia');
+            $table->boolean('lPedido');
             $table->timestamps();
             $table->softDeletes();
         });

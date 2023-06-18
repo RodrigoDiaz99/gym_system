@@ -9,8 +9,8 @@ use App\Models\Configurations;
 use App\Models\CorteCaja;
 use App\Models\Inventory;
 use App\Models\Membership;
-use App\Models\Pedidos;
 use App\Models\MembershipPay;
+use App\Models\Pedidos;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Voucher;
@@ -38,8 +38,6 @@ class SalesController extends Controller
 
     public function cashPayment(Request $request)
     {
-
-
 
         try {
             $idCorte = 0;
@@ -83,48 +81,43 @@ class SalesController extends Controller
                 if ($request->tipoPago != 3) {
                     if ($pro->lmembresia == 'true') {
 
-                        if($pro->lPedido == 'true'){
+                        if ($pro->lPedido == 'true') {
 
                             $pedido = Pedidos::where('reference_line', $pro->lineReference)
-                            ->first();
+                                ->first();
 
                             // dd($pedido);
 
                             Pedidos::where('pedidos.id', $pedido->id)->update([
-                                'estatus' => 'PAGADO',                                
+                                'estatus' => 'PAGADO',
                             ]);
 
-
-
-                        }else{
-
-
-
-
-                        $membresia = Membership::join('membership_types', 'memberships.membership_types_id', '=', 'membership_types.id')
-                            ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
-
-                            ->join('membership_pays', 'membership_membership_pays.membership_pays_id', '=', 'membership_pays.id')
-                            ->where('membership_pays.reference_line', $pro->lineReference)
-                            ->select('memberships.id as id', 'membership_pays.reference_line as lineReference', 'membership_types.days as days')
-                            ->first();
-                        if ($membresia->days == 1) {
-                            $expiration_date = Carbon::now();
                         } else {
-                            $expiration_date = Carbon::now()->addDay($membresia->days);
+
+                            $membresia = Membership::join('membership_types', 'memberships.membership_types_id', '=', 'membership_types.id')
+                                ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
+
+                                ->join('membership_pays', 'membership_membership_pays.membership_pays_id', '=', 'membership_pays.id')
+                                ->where('membership_pays.reference_line', $pro->lineReference)
+                                ->select('memberships.id as id', 'membership_pays.reference_line as lineReference', 'membership_types.days as days')
+                                ->first();
+                            if ($membresia->days == 1) {
+                                $expiration_date = Carbon::now();
+                            } else {
+                                $expiration_date = Carbon::now()->addDay($membresia->days);
+                            }
+
+                            Membership::where('memberships.id', $membresia->id)->update([
+                                'carts_id' => $cart->id,
+                                'expiration_date' => $expiration_date,
+                                'estatus_membresia' => 1,
+                            ]);
+
+                            MembershipPay::where('reference_line', $membresia->lineReference)->update([
+                                'estatus' => 'P',
+                            ]);
+
                         }
-
-                        Membership::where('memberships.id', $membresia->id)->update([
-                            'carts_id' => $cart->id,
-                            'expiration_date' => $expiration_date,
-                            'estatus_membresia' => 1,
-                        ]);
-
-                        MembershipPay::where('reference_line', $membresia->lineReference)->update([
-                            'estatus' => 'P',
-                        ]);
-
-                    }
                     } else {
                         $requireInventory = Product::where('id', $pro->id_product)->first();
 
@@ -238,7 +231,7 @@ class SalesController extends Controller
 
             if (sizeof($producto) > 0) {
                 foreach ($producto as $pro) {
-                    $list = new stdClass(); //?
+                    $list = new stdClass();
 
                     $list->name = $pro->name;
                     $list->id_product = $pro->id;
@@ -255,7 +248,6 @@ class SalesController extends Controller
                 return $gridProductos;
             } else {
 
-
                 $membresia = Membership::select('memberships.id as id', 'membership_types.name as name', 'membership_types.price as price', 'membership_pays.reference_line as lineReference')
                     ->join('membership_membership_pays', 'memberships.id', '=', 'membership_membership_pays.memberships_id')
                     ->join('membership_pays', 'membership_membership_pays.membership_pays_id', '=', 'membership_pays.id')
@@ -264,54 +256,52 @@ class SalesController extends Controller
                     ->whereNotIn('membership_pays.estatus', ['P'])
                     ->get();
 
-            if(sizeof($membresia)>0){
-                foreach ($membresia as $memb) {
-                    $list = new stdClass();
+                if (sizeof($membresia) > 0) {
+                    foreach ($membresia as $memb) {
+                        $list = new stdClass();
 
-                    $list->name = $memb->name;
-                    $list->id_product = $memb->id;
-                    $list->cantidad = 1;
-                    $list->sales_price = $memb->price;
-                    $list->quantity = 'no aplica';
-                    $list->lmembresia = true;
-                    $list->lPedido = false;
-                    $list->lineReference = $memb->lineReference;
-                    $gridProductos[] = $list;
+                        $list->name = $memb->name;
+                        $list->id_product = $memb->id;
+                        $list->cantidad = 1;
+                        $list->sales_price = $memb->price;
+                        $list->quantity = 'no aplica';
+                        $list->lmembresia = true;
+                        $list->lPedido = false;
+                        $list->lineReference = $memb->lineReference;
+                        $gridProductos[] = $list;
+                    }
+
+                } else {
+                    //    //ENTREGADO
+                    // dd($request->producto);
+
+                    // $pedido = Pedidos::select('pedidos.id as id', 'pedidos.orden_number as name', 'pedidos.price as price', 'pedidos.reference_line as lineReference')
+                    // ->where('pedidos.reference_line', $request->producto)
+                    // ->whereNotIn('pedidos.estatus', ['CANCELADO', 'PAGADO'])
+                    // ->get();
+                    $pedido = Pedidos::select('pedidos.id as id', 'pedidos.orden_number as name', 'pedidos.price as price', 'pedidos.reference_line as lineReference')
+                        ->where('pedidos.reference_line', $request->producto)
+                        ->where('pedidos.estatus', ['ENTREGADO'])
+                        ->get();
+                    // dd($pedido);
+
+                    if (sizeof($pedido) > 0) {
+                        foreach ($pedido as $pedi) {
+                            $list = new stdClass();
+
+                            $list->name = "Pedido: " . $pedi->name;
+                            $list->id_product = $pedi->id;
+                            $list->cantidad = 1;
+                            $list->sales_price = $pedi->price;
+                            $list->quantity = 'no aplica';
+                            $list->lmembresia = true;
+                            $list->lPedido = true;
+                            $list->lineReference = $pedi->lineReference;
+                            $gridProductos[] = $list;
+                        }
+                    }
+
                 }
-
-            }else{         
-                
-                // dd($request->producto);
-
-               
-
-                $pedido = Pedidos::select('pedidos.id as id', 'pedidos.orden_number as name', 'pedidos.price as price', 'pedidos.reference_line as lineReference')
-                ->where('pedidos.reference_line', $request->producto)
-                ->whereNotIn('pedidos.estatus', ['CANCELADO', 'PAGADO'])
-                ->get();
-
-                // dd($pedido);
-
-                
-            if(sizeof($pedido)>0){
-                foreach ($pedido as $pedi) {
-                    $list = new stdClass();
-
-                    $list->name = "Pedido: ".$pedi->name;
-                    $list->id_product = $pedi->id;
-                    $list->cantidad = 1;
-                    $list->sales_price = $pedi->price;
-                    $list->quantity = 'no aplica';
-                    $list->lmembresia = true;
-                    $list->lPedido = true;
-                    $list->lineReference = $pedi->lineReference;
-                    $gridProductos[] = $list;
-                }
-            }
-
-            }
-
-
 
                 // dd($gridProductos);
 
@@ -358,7 +348,7 @@ class SalesController extends Controller
             );
 
         } catch (\Throwable $th) {
-            dd($th);
+
         }
 
     }
@@ -378,7 +368,7 @@ class SalesController extends Controller
     }
 
     /**
-     * Display the specified resource.
+
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
