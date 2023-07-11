@@ -33,6 +33,7 @@
                                     class="table table-responsive table-bordered table-striped align-items-center mb-0 text-center">
                                     <thead>
                                         <tr>
+                                        <th>Identificador</th>
                                             <th>Nombre</th>
                                             <th>Unidad de Medida</th>
                                             <th>Proveedor</th>
@@ -45,6 +46,7 @@
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr>
+                                                <td>{{$product->id}}</td>
                                                 <td class="text-bold-500">
                                                     {{ $product->name }}<br>
                                                     <span>Código Barras: <strong>{{ $product->bar_code }}</strong></span>

@@ -213,17 +213,19 @@ class SalesController extends Controller
     public function search(Request $request)
     {
 
+
         try {
             $gridProductos = [];
 
             $producto = Inventory::join('products', 'inventories.products_id', '=', 'products.id')
-                ->where('products.bar_code', $request->producto)
+                // ->where('products.bar_code', $request->producto)
                 ->where(function ($query) use ($request) {
                     $query->orWhere('products.name', $request->producto);
                     $query->orWhere('products.bar_code', $request->producto);
+                    $query->orWhere('products.id',$request->producto);
                 })
 
-                ->where('inventories.status', 'Disponible')
+                 ->where('inventories.status', 'Disponible')
                 ->where('inventories.quantity', '>=', 1)
                 ->get();
 
@@ -374,6 +376,86 @@ class SalesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    // public function show(Request $request)
+    // {
+    //     try {
+    //         $data = DB::table('vouchers')
+    //             ->join('carts', 'vouchers.carts_id', '=', 'carts.id')
+    //             ->leftjoin('carts_has_products', 'carts.id', '=', 'carts_has_products.carts_id')
+    //             ->join('products', 'carts_has_products.products_id', '=', 'products.id')
+    //             ->leftjoin('inventories', 'products.id', '=', 'inventories.products_id')
+    //             ->join('users', 'carts.clients_id', '=', 'users.id')
+    //             ->where('vouchers.id', $request->id)
+
+    //             ->first();
+    //         $cart = DB::table('vouchers')
+    //             ->join('carts', 'vouchers.carts_id', '=', 'carts.id')
+    //             ->leftjoin('carts_has_products', 'carts.id', '=', 'carts_has_products.carts_id')
+    //             ->join('products', 'carts_has_products.products_id', '=', 'products.id')
+    //             ->leftjoin('inventories', 'products.id', '=', 'inventories.products_id')
+    //             ->join('users', 'carts.clients_id', '=', 'users.id')
+    //             ->where('vouchers.id', $request->id)
+    //             ->select('products.name', 'carts_has_products.quantity', 'inventories.sales_price')
+    //             ->get();
+
+    //         $fecha = DB::table('vouchers')
+    //             ->where('vouchers.id', $request->id)
+    //             ->first();
+
+    //         $logo = EscposImage::load('img/logo-ticket.png', false);
+    //        $impresora = Configurations::getConfiguracion('IMPRESORATICKETS');
+
+    //         $nombreImpresora = $impresora;
+    //         $connector = new WindowsPrintConnector($nombreImpresora);
+    //         $impresora = new Printer($connector);
+    //         $impresora->setJustification(Printer::JUSTIFY_CENTER);
+    //         $impresora->bitImage($logo);
+    //         $impresora->setEmphasis(true);
+    //         $impresora->text("Ticket de venta\n");
+    //         $impresora->text("Spacio Fems\n");
+    //         $impresora->text("C. 84 97297 Merida, Yuc.\n");
+    //         $impresora->text($fecha->created_at . "\n");
+
+    //         $impresora->setEmphasis(false);
+    //         $impresora->text("\n===============================\n");
+
+    //         foreach ($cart as $lst) {
+    //             $subtotal = $lst->quantity * $lst->sales_price;
+
+    //             $impresora->setJustification(Printer::JUSTIFY_LEFT);
+    //             $impresora->text(sprintf("%.2f x %s\n", $lst->quantity, $lst->name));
+    //             $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+    //             $impresora->text('$' . number_format($subtotal, 2) . "\n");
+    //         }
+    //         $impresora->setJustification(Printer::JUSTIFY_CENTER);
+    //         $impresora->text("\n===============================\n");
+    //         $impresora->setJustification(Printer::JUSTIFY_RIGHT);
+    //         $impresora->setEmphasis(true);
+    //         $impresora->text("Total: $" . number_format($data->price_total, 2) . "\n");
+    //         $impresora->text("Cambio: $" . number_format($data->cambio, 2) . "\n");
+    //         $impresora->setJustification(Printer::JUSTIFY_CENTER);
+    //         $impresora->setTextSize(1, 1);
+    //         $impresora->text("\n");
+    //         $impresora->text("Gracias por su compra\n");
+    //         $impresora->text("PAGO EN UNA SOLA EXHIBICION\n");
+    //         $impresora->text("LUGAR DE EXHIBICION: MERIDA,YUC.\n");
+    //         $impresora->text("EMAIL: abi_vid@hotmail.com\n");
+    //         $impresora->text("TELEFONO: 999 242 5792\n");
+    //         $impresora->feed(5);
+    //         $impresora->pulse();
+    //         $impresora->close();
+
+    //         return response()->json([
+    //             'lSuccess' => true,
+    //             'cMensaje' => 'ticket Impreso',
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         return response()->json([
+    //             'lSuccess' => false,
+    //             'cMensaje' => 'error',
+    //         ]);
+    //     }
+    // }
     public function show(Request $request)
     {
         try {
@@ -401,8 +483,8 @@ class SalesController extends Controller
                 ->first();
 
             $logo = EscposImage::load('img/logo-ticket.png', false);
-            $impresora = Configurations::getConfiguracion('IMPRESORATICKETS');
-            // dump($impresora);
+           $impresora = Configurations::getConfiguracion('IMPRESORATICKETS');
+
             $nombreImpresora = $impresora;
             $connector = new WindowsPrintConnector($nombreImpresora);
             $impresora = new Printer($connector);

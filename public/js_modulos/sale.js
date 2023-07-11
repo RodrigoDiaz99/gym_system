@@ -741,22 +741,23 @@ function data() {
 function opcion(id) {
     Swal.fire({
         title: "Opcion",
-        text: "Escoge una opcion de tickets",
+        text: "Enviar Ticket",
         icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Imprimir ticket",
-        cancelButtonText: "Sin Ticket",
+       // showCancelButton: true,
+     confirmButtonText: "Imprimir ticket",
+        //cancelButtonText: "Enviar",
         reverseButtons: true,
     }).then((result) => {
         if (result.isConfirmed) {
             console.log("entrando", id);
             imprimirTicket(id);
-        } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            enviarTicket();
         }
+        // else if (
+        //     /* Read more about handling dismissals below */
+        //     result.dismiss === Swal.DismissReason.cancel
+        // ) {
+        //     enviarTicket();
+        // }
     });
 }
 function imprimirTicket(id) {
